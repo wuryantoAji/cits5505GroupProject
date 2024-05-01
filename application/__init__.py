@@ -8,6 +8,8 @@ from config import Config
 db = SQLAlchemy()
 migrate = Migrate()
 
+from application import models
+
 def create_app(config_class=Config):
     # create and configure the app
     app = Flask(__name__)

@@ -13,8 +13,8 @@ class User(db.Model):
     comments = db.relationship('Comments', backref='User', lazy=True)
 
 class WordlePuzzle(db.Model):
-    puzzle_id = db.Column(primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('User.user_id'), nullable=False)
+    puzzle_id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
     puzzle_name = db.Column(db.String(64), unique=True)
     puzzle_solution = db.Column(db.String(64))
     number_of_attempt = db.Column(db.Integer)
@@ -22,13 +22,13 @@ class WordlePuzzle(db.Model):
     scores = db.relationship('ScoreTable', backref='WordlePuzzle', lazy=True)
 
 class ScoreTable(db.Model):
-    score_id = db.Column(primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('User.user_id'), nullable=False)
-    puzzle_id = db.Column(db.Integer, db.ForeignKey('WordlePuzzle.puzzle_id'), nullable=False)
+    score_id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
+    puzzle_id = db.Column(db.Integer, db.ForeignKey('wordle_puzzle.puzzle_id'), nullable=False)
     score_achieved = db.Column(db.Integer)
 
 class Comments(db.Model):
-    comment_id = db.Column(primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('User.user_id'), nullable=False)
+    comment_id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
     comment_text = db.Column(db.String(256))
     posted_date = db.Column(db.DateTime)

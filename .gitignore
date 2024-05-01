@@ -2,3 +2,4 @@ venv/
 application/__pycache__/
 instance/
 __pycache__/
+app.db
