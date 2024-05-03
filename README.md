@@ -27,9 +27,11 @@ Group project for CITS5505 - Agile Web Development
     >   pip install -r requirements.txt
 4. Initiate database
     > flask db init
-5. Run the application 
+5. upgrade database
+    > flask db upgrade
+6. Run the application 
     >   flask --app application run --debug
-6. Open the hello world url
+7. Open the hello world url
     1. Go to your browser and type http://localhost:5000/hello
 ## How to Run the Tests for the Application
 
