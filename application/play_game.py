@@ -23,6 +23,20 @@ def playGame(puzzleid):
 
 @bp.route('/submit-puzzle-answer/', methods=['POST']) # Need to Fix
 def submitAnswer():
-    for x in request.args:
-        print(x)
-    return request.args
+    dataPayload = request.get_json()
+    puzzleId = dataPayload['puzzleID']
+    guess = dataPayload['guess']
+    remainingGuessByClient = dataPayload['remainingGuess']
+    gameBoard = WordlePuzzle.query.filter_by(puzzle_id=puzzleId).first()
+    solution = gameBoard.puzzle_solution
+    numberOfAttempts = gameBoard.number_of_attempt
+    if(numberOfAttempts - remainingGuessByClient > 0):
+        if(guess == solution):
+            return 'winning'
+        else:
+            return 'not winning'
+    else:
+        if(guess == solution):
+            return 'winning'
+        else:
+            return 'count scoring'

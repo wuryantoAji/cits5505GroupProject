@@ -205,7 +205,8 @@
             const submit_guess_url = {{ url_for("play-game.submitAnswer")|tojson }};
             let data = {
                 "puzzleID": puzzle.puzzle_id,
-                "guess": guessString
+                "guess": guessString,
+                "remainingGuess": guessesRemaining
             };
 
             fetch(submit_guess_url, {
@@ -215,7 +216,7 @@
             })
             .then((response) => response.json())
             .then((json) => console.log(json));
-
+            guessesRemaining = guessesRemaining - 1;
         }
 
         initBoard()
