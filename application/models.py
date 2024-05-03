@@ -20,6 +20,7 @@ class WordlePuzzle(db.Model):
     number_of_attempt = db.Column(db.Integer)
     puzzle_score = db.Column(db.Integer)
     scores = db.relationship('ScoreTable', backref='WordlePuzzle', lazy=True)
+    comments = db.relationship('Comments', backref='WordlePuzzle', lazy=True)
 
 class ScoreTable(db.Model):
     score_id = db.Column(db.Integer, primary_key=True)
@@ -30,5 +31,6 @@ class ScoreTable(db.Model):
 class Comments(db.Model):
     comment_id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
+    puzzle_id = db.Column(db.Integer, db.ForeignKey('wordle_puzzle.puzzle_id'), nullable=False)
     comment_text = db.Column(db.String(256))
     posted_date = db.Column(db.DateTime)
