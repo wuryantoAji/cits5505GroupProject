@@ -18,4 +18,12 @@ def create_app(config_class=Config):
     db.init_app(app)
     migrate.init_app(app, db)
 
+    #########
+    # Import blueprints
+    from . import puzzle_list_r
+
+    # Register blueprints
+    app.register_blueprint(puzzle_list_r.main_bp)
+    ###########
+
     return app

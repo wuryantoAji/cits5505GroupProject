@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Puzzles</title>
+</head>
+<body>
+    <h1>Available Puzzles</h1>
+    <ul>
+        {% for puzzle in puzzles %}
+        <li>{{ puzzle.puzzle_name }} by {{ puzzle.User.username }} - Attempts: {{ puzzle.number_of_attempt }}, Score: {{ puzzle.puzzle_score }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
