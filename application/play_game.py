@@ -1,19 +1,22 @@
 import os
+import math
 from flask import Flask
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for, json
 )
 from datetime import date
-from application.models import User, WordlePuzzle, Comments
+from application.models import User, WordlePuzzle, Comments, ScoreTable
+from application import db
 
 bp = Blueprint('play-game', __name__, url_prefix='/play-game')
 
-@bp.route('/<int:puzzleid>', methods=['GET'])
-def playGame(puzzleid):
-    gameBoard = WordlePuzzle.query.filter_by(puzzle_id=puzzleid).first()
-    comments = Comments.query.filter_by(puzzle_id=puzzleid).order_by(Comments.posted_date).all()
+@bp.route('/<string:puzzleName>', methods=['GET'])
+def playGame(puzzleName):
+    gameBoard = WordlePuzzle.query.filter_by(puzzle_name=puzzleName).first()
+    comments = Comments.query.filter_by(puzzle_id=gameBoard.puzzle_id).order_by(Comments.posted_date).all()
+    puzzleName = gameBoard.puzzle_name.replace("-"," ")
     puzzlePayload = json.dumps({
-        'puzzle_name' : gameBoard.puzzle_name,
+        'puzzle_name' : puzzleName,
         'solution_length' : len(gameBoard.puzzle_solution),
         'number_of_guess' : gameBoard.number_of_attempt,
         'score' : gameBoard.puzzle_score,
@@ -29,14 +32,60 @@ def submitAnswer():
     remainingGuessByClient = dataPayload['remainingGuess']
     gameBoard = WordlePuzzle.query.filter_by(puzzle_id=puzzleId).first()
     solution = gameBoard.puzzle_solution
-    numberOfAttempts = gameBoard.number_of_attempt
-    if(numberOfAttempts - remainingGuessByClient > 0):
-        if(guess == solution):
-            return 'winning'
-        else:
-            return 'not winning'
+    result = []
+    isSolved = True
+    isLogin = True
+    saveToDB = True
+    if (guess == solution):
+        for elem in range(len(guess)):
+            result.append(2)
     else:
-        if(guess == solution):
-            return 'winning'
+        for index, letter in enumerate(guess):
+            if(letter in solution):
+                if(solution[index] == guess[index]):
+                    result.append(2)
+                else:
+                    result.append(1)
+            else:
+                result.append(0)
+        isSolved = False
+        if(remainingGuessByClient > 0):
+            saveToDB = False
+    # check if login
+    if(isLogin):
+        if(isSolved):
+            scoreData = ScoreTable.query.filter_by(user_id=1, puzzle_id=puzzleId).first()
+            if(scoreData is None):
+                scoreData = ScoreTable(user_id=1, puzzle_id=puzzleId, number_of_attempts=1, score_achieved=gameBoard.puzzle_score)
+                db.session.add(scoreData)
+            else:
+                scoreData.score_achieved = gameBoard.puzzle_score
+                scoreData.number_of_attempts += 1
+            gameBoard.times_puzzle_played += 1
         else:
-            return 'count scoring'
+            if(saveToDB):
+                scoreData = ScoreTable.query.filter_by(user_id=1, puzzle_id=puzzleId).first()
+                achievedScore = calculateScore(gameBoard.puzzle_score,result)
+                if(scoreData is None):
+                    scoreData = ScoreTable(user_id=1, puzzle_id=puzzleId, number_of_attempts=1, score_achieved=achievedScore) 
+                    db.session.add(scoreData)
+                else:
+                    scoreData.number_of_attempts += 1
+                    if(achievedScore > scoreData.score_achieved):
+                        scoreData.score_achieved = achievedScore
+                gameBoard.times_puzzle_played += 1
+        db.session.commit()
+    resultPayload = json.dumps({"puzzleGuess":result,
+                                "solved":isSolved})
+    return resultPayload
+
+def calculateScore(puzzleScore, arrayResult):
+    worthPerLetter = math.ceil(puzzleScore/len(arrayResult))
+    worthPartiallyPerLetter = math.ceil((puzzleScore/len(arrayResult))/2)
+    result = 0
+    for elem in arrayResult:
+        if(elem == 1):
+            result = result + worthPartiallyPerLetter
+        elif(elem == 2):
+            result = result + worthPerLetter
+    return result
