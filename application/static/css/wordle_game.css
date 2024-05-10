@@ -1,0 +1,148 @@
+h1 {
+text-align: center;
+}
+
+#board-keyboard-container {
+position: relative;
+width: 100%; /* Adjust as needed */
+height: 100vh; /* Adjust as needed */
+}
+
+#title-frame {
+position: absolute;
+top: 5%;
+left: 50%;
+transform: translate(-50%, -50%);
+}
+
+#puzzle-name {
+position: absolute;
+top: 5%;
+left: 50%;
+transform: translate(-50%, -50%);
+}
+
+#puzzle-score {
+position: absolute;
+top: 47%;
+left: 19.5%;
+transform: translate(-50%, -50%);
+color: white;
+}
+
+#playboard {
+position: absolute;
+top: 50%;
+left: 48%;
+transform: translate(-50%, -50%);
+}
+
+#game-board {
+position: absolute;
+top: 20%;
+left: 50%;
+transform: translate(-50%, -15%);
+display: flex;
+align-items: center;
+flex-direction: column;
+}
+
+#keyboard-cont {
+position: absolute;
+top: 80%;
+left: 50%;
+transform: translate(-50%, -50%);
+margin: 1rem 0;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.letter-box {
+border: 2px solid gray;
+border-radius: 3px;
+margin: 2px;
+font-size: 2.5rem;
+font-weight: 700;
+height: 3rem;
+width: 3rem;
+display: flex;
+justify-content: center;
+align-items: center;
+text-transform: uppercase;
+background: url(../gamepage/wordle_rectangle_original.PNG) no-repeat;
+background-size: 3rem 3rem;
+}
+
+.filled-box {
+border: 2px solid black;
+}
+
+.letter-row {
+display: flex;
+}
+
+#keyboard-cont div {
+display: flex;
+}
+
+.second-row {
+margin: 0.5rem 0;
+}
+
+.keyboard-button {
+background-size: 3rem 3rem;
+height: 3rem;
+width: 3rem;
+font-size: 1rem;
+font-weight: 700;
+padding: 0.5rem;
+margin: 0 2px;
+cursor: pointer;
+text-transform: uppercase;
+color: transparent;
+}
+
+.keyboard-button-del {
+background: url(../gamepage/wordle_rectangle_original.PNG) no-repeat;
+background-size: 3rem 3rem;
+height: 3rem;
+width: 3rem;
+font-size: 1rem;
+font-weight: 700;
+padding: 0.5rem;
+margin: 0 2px;
+cursor: pointer;
+text-transform: uppercase;
+}
+
+.keyboard-button-enter {
+background: url(../gamepage/wordle_rectangle_original.PNG) no-repeat;
+background-size: 4rem 3rem;
+height: 3rem;
+width: 4rem;
+font-size: 1rem;
+font-weight: 700;
+padding: 0.5rem;
+margin: 0 2px;
+cursor: pointer;
+text-transform: uppercase;
+}
+
+.comment-section {
+    margin: -10px auto;
+    background: rgba(89, 89, 89, 0.4);
+    padding: 10px 40px;
+}
+
+.comment-content {
+    padding: 10px 0;
+    overflow: hidden;
+    list-style: none;
+    min-width: 100% ! Important;
+}
+
+.comment {
+    overflow: hidden;
+    margin-bottom: 35px;
+}

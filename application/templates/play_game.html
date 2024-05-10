@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play Wordle</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
+    <link
+        rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+      />
+    <link rel="stylesheet" href="../static/css/wordle_game.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body background="{{ url_for('static', filename='background_score_list.png') }}">
+    <header class="d-flex flex-wrap justify-content-center mb-4 border-bottom">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+          <img src="{{ url_for('static', filename='website_name_otherpage.png') }}">
+        </a>
+        <ul class="nav nav-pills">
+          <li class="nav-item"><a href="#" class="nav-link active" aria-current="page"><img src="{{ url_for('static', filename='navigation/puzzle.PNG') }}" style="width:200px;height:50px;"></a></li>
+          <li class="nav-item"><a href="#" class="nav-link"><img src="{{ url_for('static', filename='navigation/score.PNG') }}" style="width:200px;height:50px;"></a></li>
+          <li class="nav-item"><a href="#" class="nav-link"><img src="{{ url_for('static', filename='navigation/create.PNG') }}" style="width:200px;height:50px;"></a></li>
+          <li class="nav-item"><a href="#" class="nav-link"><img src="{{ url_for('static', filename='navigation/profile.PNG') }}" style="width:200px;height:50px;"></a></li>
+        </ul>
+    </header>
+    <div>
+        <div id="board-keyboard-container">
+            <img id="playboard" src="{{ url_for('static', filename='gamepage/playboard_withscore.PNG') }}" alt="board-asset">
+            <img id="title-frame" src="{{ url_for('static', filename='gamepage/title_frame.PNG') }}" alt="title-frame-asset">
+            <h2 id="puzzle-name"></h2>
+            <h3 id="puzzle-score"></h3>
+            <div id="game-board"></div>
+            <div id="keyboard-cont">
+                <div class="first-row">
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/q.PNG') }});background-size: cover;">q</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/w.PNG') }});background-size: cover;">w</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/e.PNG') }});background-size: cover;">e</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/r.PNG') }});background-size: cover;">r</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/t.PNG') }});background-size: cover;">t</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/y.PNG') }});background-size: cover;">y</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/u.PNG') }});background-size: cover;">u</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/i.PNG') }});background-size: cover;">i</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/o.PNG') }});background-size: cover;">o</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/p.PNG') }});background-size: cover;">p</button>
+                </div>
+                <div class="second-row">
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/a.PNG') }});background-size: cover;">a</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/s.PNG') }});background-size: cover;">s</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/d.PNG') }});background-size: cover;">d</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/f.PNG') }});background-size: cover;">f</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/g.PNG') }});background-size: cover;">g</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/h.PNG') }});background-size: cover;">h</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/j.PNG') }});background-size: cover;">j</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/k.PNG') }});background-size: cover;">k</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/l.PNG') }});background-size: cover;">l</button>
+                </div>
+                <div class="third-row">
+                    <button class="keyboard-button-del">Del</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/z.PNG') }});background-size: cover;">z</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/x.PNG') }});background-size: cover;">x</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/c.PNG') }});background-size: cover;">c</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/v.PNG') }});background-size: cover;">v</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/b.PNG') }});background-size: cover;">b</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/n.PNG') }});background-size: cover;">n</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/m.PNG') }});background-size: cover;">m</button>
+                    <button class="keyboard-button-enter">Enter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="comment-section">
+        <ul id="comment-content">
+            <div id="comment">
+                From Johny - posted on 3rd of May 2024 
+                Great puzzle
+            </div>
+        </ul>
+    </div>
+    {% block javascript %}
+    <script>
+        puzzle = JSON.parse({{ puzzle | tojson }})
+        const NUMBER_OF_GUESSES = puzzle.number_of_guess;
+        const SOLUTION_LENGTH = puzzle.solution_length;
+        let guessesRemaining = NUMBER_OF_GUESSES;
+        let currentGuess = [];
+        let nextLetter = 0;
+
+        document.getElementById("puzzle-name").innerHTML = puzzle.puzzle_name;
+        document.getElementById("puzzle-score").innerHTML = puzzle.score;
+
+        function initBoard() {
+            let board = document.getElementById("game-board");
+
+            for (let i = 0; i < NUMBER_OF_GUESSES; i++) {
+                let row = document.createElement("div")
+                row.className = "letter-row"
+                
+                for (let j = 0; j < SOLUTION_LENGTH; j++) {
+                    let box = document.createElement("div")
+                    box.className = "letter-box"
+                    row.appendChild(box)
+                }
+
+                board.appendChild(row)
+            }
+        }
+
+        function shadeKeyBoard(letter, color) {
+            for (const elem of document.getElementsByClassName("keyboard-button")) {
+                if (elem.textContent === letter) {
+                    let computedStyle = window.getComputedStyle(elem);
+                    let backgroundImageURL = computedStyle.backgroundImage;
+                    let letterName = backgroundImageURL.match(/\/([^/]+)\.([a-zA-Z0-9]+)"\)$/)[1];
+                    let oldColor = elem.style.backgroundColor
+                    if (oldColor === 'green') {
+                        return
+                    } 
+
+                    if (oldColor === 'yellow' && color !== 'green') {
+                        return
+                    }
+                    elem.style.backgroundColor = color
+                    if(color == "grey"){
+                        elem.style.backgroundImage = `url(../static/gamepage/keyboard/Incorrect/${letterName}.PNG)`;
+                    }else if(color == "yellow"){
+                        elem.style.backgroundImage = `url(../static/gamepage/keyboard/Partial/${letterName}.PNG)`;
+                    }else if(color == "green"){
+                        elem.style.backgroundImage = `url(../static/gamepage/keyboard/Correct/${letterName}.PNG)`;
+                    }
+                    break
+                }
+            }
+        }
+
+        function deleteLetter () {
+            let row = document.getElementsByClassName("letter-row")[NUMBER_OF_GUESSES - guessesRemaining]
+            let box = row.children[nextLetter - 1]
+            box.textContent = ""
+            box.classList.remove("filled-box")
+            currentGuess.pop()
+            nextLetter -= 1
+        }
+
+        function insertLetter (pressedKey) {
+            if (nextLetter === SOLUTION_LENGTH) {
+                return
+            }
+            pressedKey = pressedKey.toLowerCase()
+            let row = document.getElementsByClassName("letter-row")[NUMBER_OF_GUESSES - guessesRemaining]
+            let box = row.children[nextLetter]
+            box.textContent = pressedKey
+            box.classList.add("filled-box")
+            currentGuess.push(pressedKey)
+            nextLetter += 1
+        }
+
+        const animateCSS = (element, animation, prefix = "animate__") =>
+        // We create a Promise and return it
+        new Promise((resolve, reject) => {
+            const animationName = `${prefix}${animation}`;
+            // const node = document.querySelector(element);
+            const node = element;
+            node.style.setProperty("--animate-duration", "0.3s");
+
+            node.classList.add(`${prefix}animated`, animationName);
+
+            // When the animation ends, we clean the classes and resolve the Promise
+            function handleAnimationEnd(event) {
+            event.stopPropagation();
+            node.classList.remove(`${prefix}animated`, animationName);
+            resolve("Animation ended");
+            }
+
+            node.addEventListener("animationend", handleAnimationEnd, { once: true });
+        });
+
+        document.addEventListener("keyup", (e) => {
+        if (guessesRemaining === 0) {
+            return;
+        }
+
+        let pressedKey = String(e.key);
+        if (pressedKey === "Backspace" && nextLetter !== 0) {
+            deleteLetter();
+            return;
+        }
+
+        if (pressedKey === "Enter") {
+            checkGuess();
+            return;
+        }
+
+        let found = pressedKey.match(/[a-z]/gi);
+        if (!found || found.length > 1) {
+            return;
+        } else {
+            insertLetter(pressedKey);
+        }
+        });
+
+        document.getElementById("keyboard-cont").addEventListener("click", (e) => {
+        const target = e.target;
+
+        if (!target.classList.contains("keyboard-button")) {
+            return;
+        }
+        let key = target.textContent;
+
+        if (key === "Del") {
+            key = "Backspace";
+        }
+
+        document.dispatchEvent(new KeyboardEvent("keyup", { key: key }));
+        });
+
+        async function checkGuess () {
+            let row = document.getElementsByClassName("letter-row")[NUMBER_OF_GUESSES - guessesRemaining]
+            let guessString = '' 
+            var isSolved = true
+
+            for (const val of currentGuess) {
+                guessString += val
+            }
+
+            if (guessString.length != SOLUTION_LENGTH) {
+                alert("Not enough letters!")
+                return
+            }
+
+            guessesRemaining -= 1;
+            const submit_guess_url = {{ url_for("play-game.submitAnswer")|tojson }};
+            let data = {
+                "puzzleID": puzzle.puzzle_id,
+                "guess": guessString,
+                "remainingGuess": guessesRemaining
+            };
+
+            await fetch(submit_guess_url, {
+                "method": "POST",
+                "headers": {"Content-Type": "application/json"},
+                "body": JSON.stringify(data),
+            })
+            .then((response) => response.json())
+            .then((guessResult) => {
+                var letterColor = [];
+                for (let i = 0; i < guessResult.puzzleGuess.length; i++) {
+                    if(guessResult.puzzleGuess[i] == 0){
+                        letterColor.push('grey');
+                        isSolved = false
+                    }else if(guessResult.puzzleGuess[i] == 1){
+                        letterColor.push('yellow');
+                        isSolved = false
+                    }else if(guessResult.puzzleGuess[i] == 2){
+                        letterColor.push('green');
+                    }
+                }
+                for (let i = 0; i < letterColor.length; i++) {
+                    let box = row.children[i];
+                    let delay = 250 * i;
+                    setTimeout(() => {
+                    //flip box
+                        animateCSS(box, "flipInX");
+                        //shade box
+                        box.style.backgroundColor = letterColor[i];
+                        if(letterColor[i]=="grey"){
+                            box.style.background = "url({{ url_for('static', filename='gamepage/wordle_rectangle_not.PNG') }})";
+                        }else if(letterColor[i]=="yellow"){
+                            box.style.background = "url({{ url_for('static', filename='gamepage/wordle_rectangle_yellow.PNG') }})";
+                        }else if(letterColor[i]=="green"){
+                            box.style.background = "url({{ url_for('static', filename='gamepage/wordle_rectangle_right.PNG') }})";
+                        }                    
+                        shadeKeyBoard(guessString.charAt(i) + "", letterColor[i]);
+                    }, delay);
+                }
+            });
+            if(isSolved){
+                toastr.success("You guessed right! Game over!");
+                guessesRemaining = 0;
+            } else {
+                currentGuess = [];
+                nextLetter = 0;
+                if (guessesRemaining === 0) {
+                    toastr.error("You've run out of guesses! Game over!");
+                }
+            }
+        }
+        initBoard()
+    </script>
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
+    <script 
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    {% endblock %}
+</body>
+</html>

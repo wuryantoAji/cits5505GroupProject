@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, request, current_app
+from flask import Blueprint, Flask, request, current_app
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from config import Config
@@ -17,5 +17,8 @@ def create_app(config_class=Config):
 
     db.init_app(app)
     migrate.init_app(app, db)
+
+    from . import play_game
+    app.register_blueprint(play_game.bp)
 
     return app
