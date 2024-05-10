@@ -13,6 +13,9 @@ bp = Blueprint('play-game', __name__, url_prefix='/play-game')
 @bp.route('/<string:puzzleName>', methods=['GET'])
 def playGame(puzzleName):
     gameBoard = WordlePuzzle.query.filter_by(puzzle_name=puzzleName).first()
+    print(gameBoard)
+    if(gameBoard is None):
+        return("No Puzzle Found")
     comments = Comments.query.filter_by(puzzle_id=gameBoard.puzzle_id).order_by(Comments.posted_date).all()
     puzzleName = gameBoard.puzzle_name.replace("-"," ")
     puzzlePayload = json.dumps({
@@ -29,9 +32,13 @@ def submitAnswer():
     dataPayload = request.get_json()
     puzzleId = dataPayload['puzzleID']
     guess = dataPayload['guess']
+    if(any(char.isdigit() for char in guess)):
+        return("No Number is Allowed")
     remainingGuessByClient = dataPayload['remainingGuess']
     gameBoard = WordlePuzzle.query.filter_by(puzzle_id=puzzleId).first()
     solution = gameBoard.puzzle_solution
+    if(len(guess) != len(solution)):
+        return("Not Enough Letter")
     result = []
     isSolved = True
     isLogin = True
