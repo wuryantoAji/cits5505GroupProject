@@ -25,44 +25,48 @@
           <li class="nav-item"><a href="#" class="nav-link"><img src="{{ url_for('static', filename='navigation/profile.PNG') }}" style="width:200px;height:50px;"></a></li>
         </ul>
     </header>
-
-    <h2 id="puzzle-name"></h2>
-    <div style="background-image:url({{ url_for('static', filename='gamepage/playboard_withscore.PNG') }});">
-        <div id="game-board"></div>
-        <div id="keyboard-cont">
-            <div class="first-row">
-                <button class="keyboard-button">q</button>
-                <button class="keyboard-button">w</button>
-                <button class="keyboard-button">e</button>
-                <button class="keyboard-button">r</button>
-                <button class="keyboard-button">t</button>
-                <button class="keyboard-button">y</button>
-                <button class="keyboard-button">u</button>
-                <button class="keyboard-button">i</button>
-                <button class="keyboard-button">o</button>
-                <button class="keyboard-button">p</button>
-            </div>
-            <div class="second-row">
-                <button class="keyboard-button">a</button>
-                <button class="keyboard-button">s</button>
-                <button class="keyboard-button">d</button>
-                <button class="keyboard-button">f</button>
-                <button class="keyboard-button">g</button>
-                <button class="keyboard-button">h</button>
-                <button class="keyboard-button">j</button>
-                <button class="keyboard-button">k</button>
-                <button class="keyboard-button">l</button>
-            </div>
-            <div class="third-row">
-                <button class="keyboard-button">Del</button>
-                <button class="keyboard-button">z</button>
-                <button class="keyboard-button">x</button>
-                <button class="keyboard-button">c</button>
-                <button class="keyboard-button">v</button>
-                <button class="keyboard-button">b</button>
-                <button class="keyboard-button">n</button>
-                <button class="keyboard-button">m</button>
-                <button class="keyboard-button-enter">Enter</button>
+    <div>
+        <div id="board-keyboard-container">
+            <img id="playboard" src="{{ url_for('static', filename='gamepage/playboard_withscore.PNG') }}" alt="board-asset">
+            <img id="title-frame" src="{{ url_for('static', filename='gamepage/title_frame.PNG') }}" alt="title-frame-asset">
+            <h2 id="puzzle-name"></h2>
+            <h3 id="puzzle-score"></h3>
+            <div id="game-board"></div>
+            <div id="keyboard-cont">
+                <div class="first-row">
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/q.PNG') }});background-size: cover;">q</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/w.PNG') }});background-size: cover;">w</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/e.PNG') }});background-size: cover;">e</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/r.PNG') }});background-size: cover;">r</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/t.PNG') }});background-size: cover;">t</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/y.PNG') }});background-size: cover;">y</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/u.PNG') }});background-size: cover;">u</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/i.PNG') }});background-size: cover;">i</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/o.PNG') }});background-size: cover;">o</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/p.PNG') }});background-size: cover;">p</button>
+                </div>
+                <div class="second-row">
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/a.PNG') }});background-size: cover;">a</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/s.PNG') }});background-size: cover;">s</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/d.PNG') }});background-size: cover;">d</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/f.PNG') }});background-size: cover;">f</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/g.PNG') }});background-size: cover;">g</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/h.PNG') }});background-size: cover;">h</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/j.PNG') }});background-size: cover;">j</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/k.PNG') }});background-size: cover;">k</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/l.PNG') }});background-size: cover;">l</button>
+                </div>
+                <div class="third-row">
+                    <button class="keyboard-button-del">Del</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/z.PNG') }});background-size: cover;">z</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/x.PNG') }});background-size: cover;">x</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/c.PNG') }});background-size: cover;">c</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/v.PNG') }});background-size: cover;">v</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/b.PNG') }});background-size: cover;">b</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/n.PNG') }});background-size: cover;">n</button>
+                    <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/m.PNG') }});background-size: cover;">m</button>
+                    <button class="keyboard-button-enter">Enter</button>
+                </div>
             </div>
         </div>
     </div>
@@ -84,6 +88,7 @@
         let nextLetter = 0;
 
         document.getElementById("puzzle-name").innerHTML = puzzle.puzzle_name;
+        document.getElementById("puzzle-score").innerHTML = puzzle.score;
 
         function initBoard() {
             let board = document.getElementById("game-board");
@@ -105,6 +110,9 @@
         function shadeKeyBoard(letter, color) {
             for (const elem of document.getElementsByClassName("keyboard-button")) {
                 if (elem.textContent === letter) {
+                    let computedStyle = window.getComputedStyle(elem);
+                    let backgroundImageURL = computedStyle.backgroundImage;
+                    let letterName = backgroundImageURL.match(/\/([^/]+)\.([a-zA-Z0-9]+)"\)$/)[1];
                     let oldColor = elem.style.backgroundColor
                     if (oldColor === 'green') {
                         return
@@ -113,8 +121,14 @@
                     if (oldColor === 'yellow' && color !== 'green') {
                         return
                     }
-
                     elem.style.backgroundColor = color
+                    if(color == "grey"){
+                        elem.style.backgroundImage = `url(../static/gamepage/keyboard/Incorrect/${letterName}.PNG)`;
+                    }else if(color == "yellow"){
+                        elem.style.backgroundImage = `url(../static/gamepage/keyboard/Partial/${letterName}.PNG)`;
+                    }else if(color == "green"){
+                        elem.style.backgroundImage = `url(../static/gamepage/keyboard/Correct/${letterName}.PNG)`;
+                    }
                     break
                 }
             }
@@ -215,7 +229,6 @@
                 return
             }
 
-            //CHANGE THIS WHOLE BLOCK OF CODE INTO JQUERY
             guessesRemaining -= 1;
             const submit_guess_url = {{ url_for("play-game.submitAnswer")|tojson }};
             let data = {
@@ -251,6 +264,13 @@
                         animateCSS(box, "flipInX");
                         //shade box
                         box.style.backgroundColor = letterColor[i];
+                        if(letterColor[i]=="grey"){
+                            box.style.background = "url({{ url_for('static', filename='gamepage/wordle_rectangle_not.PNG') }})";
+                        }else if(letterColor[i]=="yellow"){
+                            box.style.background = "url({{ url_for('static', filename='gamepage/wordle_rectangle_yellow.PNG') }})";
+                        }else if(letterColor[i]=="green"){
+                            box.style.background = "url({{ url_for('static', filename='gamepage/wordle_rectangle_right.PNG') }})";
+                        }                    
                         shadeKeyBoard(guessString.charAt(i) + "", letterColor[i]);
                     }, delay);
                 }

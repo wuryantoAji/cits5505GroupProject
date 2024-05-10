@@ -24,7 +24,7 @@ def playGame(puzzleName):
     })
     return render_template('play_game.html',puzzle=puzzlePayload)
 
-@bp.route('/submit-puzzle-answer/', methods=['POST']) # Need to Fix
+@bp.route('/submit-puzzle-answer/', methods=['POST'])
 def submitAnswer():
     dataPayload = request.get_json()
     puzzleId = dataPayload['puzzleID']
