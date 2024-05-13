@@ -35,12 +35,12 @@ body {
 }
 
 footer {
-    position: absolute; /* Position the footer absolutely within the body */
+    position: absolute;
     bottom: 0; /* Align the bottom edge of the footer with the bottom edge of the body */
     left: 0; /* Align the left edge of the footer with the left edge of the body */
     width: 100%; /* Make the footer stretch the entire width */
     background-color: #d1e6ff;
     color: rgb(0, 0, 0);
     padding: 10px;
-    text-align: left;
+    text-align: center;
 }
