@@ -21,4 +21,7 @@ def create_app(config_class=Config):
     from . import play_game
     app.register_blueprint(play_game.bp)
 
+    from . import create_game
+    app.register_blueprint(create_game.bp_create)
+
     return app

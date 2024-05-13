@@ -1,9 +1,9 @@
 import os
 from flask import Flask
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, session, url_for, json,
-    login_required, current_user
+    Blueprint, flash, g, redirect, render_template, request, session, url_for, json
 )
+from flask_login import login_required, current_user
 from datetime import date
 from application.models import User, WordlePuzzle
 from application import db
@@ -24,7 +24,7 @@ def create_game():
     #game_url = f"{base_url}{safe_game_name}"
     
     new_game = WordlePuzzle(
-        user_id=current_user.id,
+        user_id=1,
         puzzle_name=game_name, 
         puzzle_solution=wordle_solution,
         number_of_attempt=number_of_attemps,
