@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Your Wordle Game</title>
+</head>
+<body>
+    <h1>Create Your Wordle Game</h1>
+    <form action="/create_game" method="post">
+        <label for="form_game_name">Please give a unique name for your wordle game:</label>
+        <input type="text" name="form_game_name" required><br><br>
+
+        <label for="form_wordle_solution">Please type in the correct Wordle solution:</label>
+        <input type="text" name="form_wordle_solution" required><br><br>
+
+        <label for="form_number_of_attempts">How many attempts are allowed for your Wordle game:</label>
+        <input type="number" name="form_number_of_attempts" required><br><br>
+
+        <button type="submit">Submit and Create</button>
+    </form>
+</body>
+</html>
+
