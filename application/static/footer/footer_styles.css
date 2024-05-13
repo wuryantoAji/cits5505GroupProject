@@ -44,12 +44,3 @@ footer {
     padding: 10px;
     text-align: left;
 }
-
-.foreground-container {
-    background-image: url('../static/leaderboard/wooden_frame.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    position: relative;
-    z-index: 0;
-}
