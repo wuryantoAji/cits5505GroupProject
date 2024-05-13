@@ -1,0 +1,46 @@
+/* Reset some default browser styles */
+/* body, header, main, footer {
+    margin: 0;
+    padding: 0;
+} */
+
+/* Header styles */
+/* header {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+} */
+
+/* Footer styles */
+/* footer {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+} */
+
+/* main {
+    padding: 20px;
+} */
+
+/* Example CSS for footer */
+body {
+    position: relative; /* Set the body as a relative positioning context */
+    margin: 0; /* Resetting default margin */
+    padding-bottom: 60px; /* Adjust this value according to your footer height */
+}
+
+footer {
+    position: absolute;
+    bottom: 0; /* Align the bottom edge of the footer with the bottom edge of the body */
+    left: 0; /* Align the left edge of the footer with the left edge of the body */
+    width: 100%; /* Make the footer stretch the entire width */
+    background-color: #d1e6ff;
+    color: rgb(0, 0, 0);
+    padding: 10px;
+    text-align: center;
+}
