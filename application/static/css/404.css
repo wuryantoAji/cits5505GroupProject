@@ -1,0 +1,37 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #ddecdd;
+}
+
+.sign {
+  display: block;
+  position: absolute;
+  width: 30%;
+  height: auto;
+  top: 6%;
+  left: 35%;
+  margin: 0 auto;
+}
+
+.tohome_button {
+  display: block;
+  position: absolute;
+  width: 20%;
+  height: auto;
+  top: 70%;
+  left: 41%;
+}
+
+.notfound {
+  font-size: 40px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  position: absolute;
+  display: block;
+  top: 63%;
+  left: 41%;
+}
