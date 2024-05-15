@@ -18,15 +18,17 @@ def create_app(config_class=Config):
     db.init_app(app)
     migrate.init_app(app, db)
 
-    #########
     # Import blueprints
     from . import puzzle_list_r
 
     # Register blueprints
     app.register_blueprint(puzzle_list_r.main_bp)
-    ###########
+
     from . import play_game
     app.register_blueprint(play_game.bp)
+
+    from . import create_game
+    app.register_blueprint(create_game.bp_create)
 
     # 404 Error Handler
     @app.errorhandler(404)
