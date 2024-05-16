@@ -6,7 +6,7 @@ from application import db
 
 bp = Blueprint('login-register', __name__, url_prefix='/login-register')
 
-@bp.route('/login_register', methods=['GET', 'POST'])
+@bp.route('/', methods=['GET', 'POST'])
 def login_register():
     if request.method == 'POST':
         if 'register' in request.form:
@@ -32,7 +32,7 @@ def login_register():
             if user and user.check_password(password):
                 session['user_id'] = user.user_id
                 flash('You have been successfully logged in.')
-                return redirect(url_for('index')) # Maybe change 'index'
+                return redirect(url_for('puzzle-list'))
             flash('Invalid username or password!')
     return render_template('login_register.html')
 

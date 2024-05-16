@@ -2,7 +2,7 @@ import os
 import math
 from flask import Flask
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, session, url_for, json
+    Blueprint, flash, g, redirect, render_template, request, session, url_for, json, redirect
 )
 from datetime import date
 from application.models import User, WordlePuzzle, Comments, ScoreTable
@@ -13,9 +13,8 @@ bp = Blueprint('play-game', __name__, url_prefix='/play-game')
 @bp.route('/<string:puzzleName>', methods=['GET'])
 def playGame(puzzleName):
     gameBoard = WordlePuzzle.query.filter_by(puzzle_name=puzzleName).first()
-    print(gameBoard)
     if(gameBoard is None):
-        return("No Puzzle Found")
+        return redirect('/404')
     comments = Comments.query.filter_by(puzzle_id=gameBoard.puzzle_id).order_by(Comments.posted_date).all()
     puzzleName = gameBoard.puzzle_name.replace("-"," ")
     puzzlePayload = json.dumps({

@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Redirect to game page if Guest button is clicked
   guestBtn.onclick = function () {
-    window.location.href = "/application/templates/puzzle_list.html";
+    window.location.href = "/puzzle-list/";
   };
 });
 
@@ -48,12 +48,12 @@ $("#loginForm").submit(function (event) {
 
   $.ajax({
     type: "POST",
-    url: "/login-register/login_register",
+    url: "/login-register/",
     data: $(this).serialize() + "&action=login", // a parameter to distinguish login
     success: function (data) {
       console.log(data);
       if (data.success) {
-        window.location.href = "puzzle_list.html"; // jump to puzzle list page after login successfully
+        window.location.href = "/puzzle-list/"; // jump to puzzle list page after login successfully
       } else {
         alert(data.message); // error message
       }
@@ -69,7 +69,7 @@ $("#signupForm").submit(function (event) {
 
   $.ajax({
     type: "POST",
-    url: "/login-register/login_register",
+    url: "/login-register/",
     data: $(this).serialize() + "&action=register", // a parameter distinguish register
     success: function (data) {
       console.log(data);
