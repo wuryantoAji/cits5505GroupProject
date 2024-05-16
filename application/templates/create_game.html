@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Your Wordle Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-image: url('/static/background_score_list.png');
+            background-size: cover;
+        }
+
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f8f8f8;
+            background-image: url('/static/gamepage/commentboard.png');
+            background-size: 30px 30px;
+            background-position: 10px center;
+            padding-left: 45px;
+
+        button {
+            width: calc(100% - 40px);
+            padding: 14px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 30px;
+            width: 30px;
+            background-image: url('/static/createpage/upload_button.png');
+            background-size: cover;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Create Your Wordle Game</h1>
+    <form action="/create_game" method="post">
+        <label for="form_game_name">Please give a unique name for your wordle game:</label>
+        <input type="text" name="form_game_name" placeholder="Please use letters and numbers" required><br><br>
+
+        <label for="form_wordle_solution">Please type in the correct Wordle solution:</label>
+        <input type="text" name="form_wordle_solution" placeholder="Please use a real word" required><br><br>
+
+        <label for="form_number_of_attempts">How many attempts are allowed for your Wordle game:</label>
+        <input type="number" name="form_number_of_attempts" placeholder="Please use a number" required><br><br>
+
+        <button type="submit">Submit and Create</button>
+    </form>
+</body>
+</html>
