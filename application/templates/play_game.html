@@ -31,7 +31,9 @@
             <img id="title-frame" src="{{ url_for('static', filename='gamepage/title_frame.PNG') }}" alt="title-frame-asset">
             <h2 id="puzzle-name"></h2>
             <h3 id="puzzle-score"></h3>
-            <div id="game-board"></div>
+            <div class="scrollable-container">
+                <div id="game-board"></div>
+            </div>
             <div id="keyboard-cont">
                 <div class="first-row">
                     <button class="keyboard-button" style="background-image: url({{ url_for('static', filename='gamepage/keyboard/Original/q.PNG') }});">q</button>
@@ -69,14 +71,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div id="comment-section">
-        <ul id="comment-content">
-            <div id="comment">
-                From Johny - posted on 3rd of May 2024 
-                Great puzzle
-            </div>
-        </ul>
     </div>
     {% include "footer.html" %}
     {% block javascript %}

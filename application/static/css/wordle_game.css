@@ -38,13 +38,22 @@ transform: translate(-50%, -50%);
 }
 
 #game-board {
-position: absolute;
-top: 20%;
-left: 50%;
-transform: translate(-50%, -15%);
 display: flex;
 align-items: center;
 flex-direction: column;
+}
+
+.scrollable-container {
+    position: absolute;
+    top: 23%;
+    left: 50%;
+    transform: translate(-50%, -15%);
+    width: 50%; /* Set the width of the container */
+    height: 50%; /* Set the height of the container */
+    border: 1px solid #ccc; /* Optional: border for the container */
+    padding: 10px; /* Optional: padding for the container */
+    overflow: auto; /* Makes overflow items scrollable */
+    white-space: nowrap; /* Prevents content from wrapping to test horizontal scrolling */
 }
 
 #keyboard-cont {
