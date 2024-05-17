@@ -1,25 +1,30 @@
 body {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     height: 100vh;
     margin: 0;
     background-image: url("../loginpage/BACKGROUND-PIC.png");
     background-size: cover;
-    background-position: center;
+    background-position: relative;
 }
 
 nav {
-    position: relative;
-    background-color: transparent;
-    width: 100%; 
-
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 ul.nav-list {
     list-style-type: none;
     display: flex;
+    margin: 0;
+    padding: 10px;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .nav-home {
@@ -36,6 +41,7 @@ ul.nav-list {
 }
 
 header {
+    margin-top: 50px;
     font-family: 'Comic Sans MS', sans-serif;
     font-size: 2em;
     color: #3b72ff;
@@ -50,7 +56,6 @@ header {
     background-color: rgba(242, 184, 147, 0.85);
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 

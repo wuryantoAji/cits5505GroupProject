@@ -4,8 +4,7 @@
     <meta charset="UTF-8"/>
     <title>Create Your Wordle Game</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/create_game.css') }}">
-</head>   
-
+</head>
 <body>  
     <nav>
         <ul class="nav-list">
@@ -20,7 +19,7 @@
         <h1>Create Your Wordle Game</h1>
     </header>
     <div class="content">
-        <form action="{{ url_for('create_game.post_request') }}" method="POST">
+        <form action="{{ url_for('create-game.protect') }}" method="POST">
             <label for="form_game_name">Please give a unique name for your wordle game:</label>
             <input type="text" name="form_game_name" placeholder="Please use letters and numbers" required><br><br>
 

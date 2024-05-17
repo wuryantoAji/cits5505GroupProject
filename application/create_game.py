@@ -36,39 +36,12 @@ def post_request():
     safe_game_name = quote(game_name.replace(" ", "_").lower())
     existing_game = WordlePuzzle.query.filter_by(puzzle_name=safe_game_name).first()
     if existing_game:
-        return "Game name already exists. Please choose a different name."
-    wordle_solution = request.form['form_wordle_solution']
-    number_of_attempts = int(request.form['form_number_of_attempts'])
-    base_url = request.url_root.rstrip('/')
-    game_url = f"{base_url}/{safe_game_name}"
-    print(game_url)
-
-    new_game = WordlePuzzle(
-        user_id=current_user.user_id,
-        puzzle_name=game_name,
-        puzzle_solution=wordle_solution,
-        number_of_attempt=number_of_attempts,
-        puzzle_score=100,
-        times_played=0,
-    )
-
-    db.session.add(new_game)
-    db.session.commit()
-
-    return f"Game created: <a href='{game_url}'>{game_name}</a>"
-
-def post_request():
-    game_name = request.form['form_game_name']
-    safe_game_name = quote(game_name.replace(" ", "_").lower())
-    existing_game = WordlePuzzle.query.filter_by(puzzle_name=safe_game_name).first()
-    if existing_game:
         flash("Game name already exists. Please choose a different name.")
-        return redirect(url_for('./create_game.html'))
+        return render_template('./create_game.html')
 
     wordle_solution = request.form['form_wordle_solution']
     number_of_attempts = int(request.form['form_number_of_attempts'])
-    base_url = request.url_root.rstrip('/')
-    game_url = f"{base_url}./play-game/{safe_game_name}"
+    game_url = f"../play-game/{safe_game_name}"
 
     new_game = WordlePuzzle(
         user_id=current_user.user_id,

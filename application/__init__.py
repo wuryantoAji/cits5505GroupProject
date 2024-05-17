@@ -44,10 +44,4 @@ def create_app(config_class=Config):
         # note that we set the 404 status explicitly
         return render_template('404.html'), 404
     
-    @app.route('/<game_name>')
-    def show_game(game_name):
-        from application.models import WordlePuzzle
-        game = WordlePuzzle.query.filter_by(puzzle_name=game_name).first_or_404()
-        return render_template('play_game.html', game=game)
-
     return app
