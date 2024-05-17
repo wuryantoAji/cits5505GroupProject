@@ -10,6 +10,7 @@ db = SQLAlchemy()
 migrate = Migrate()
 login_manager = LoginManager()
 
+
 def create_app(config_class=Config):
     # create and configure the app
     app = Flask(__name__)
@@ -19,8 +20,7 @@ def create_app(config_class=Config):
     migrate.init_app(app, db)
     #new
     login_manager.init_app(app)
-    app.config['SESSION_TYPE'] = 'filesystem'
-    Session(app)
+    login_manager.login_view = 'login-register.login_register' 
     @login_manager.user_loader
     def load_user(user_id):
         from application.models import User
@@ -36,7 +36,6 @@ def create_app(config_class=Config):
     app.register_blueprint(create_game.bp_create)
     from . import login_register
     app.register_blueprint(login_register.bp)
-    login_manager.login_view = 'login-register.login_register' 
     from . import home
     app.register_blueprint(home.bp_home)
     # 404 Error Handler
@@ -45,20 +44,10 @@ def create_app(config_class=Config):
         # note that we set the 404 status explicitly
         return render_template('404.html'), 404
     
-    @app.route('/login-register', methods=['POST'])
-    def login():
-        # 假设验证用户名和密码成功后
-        user_id = 1  # 假设用户ID为1
-        session['user_id'] = user_id
-        return redirect(url_for('home'))
-
-    @app.route('/')
-    def index():
-        user_id = session.get('user_id')
-        if user_id:
-            # 如果用户已经登录，根据用户ID加载用户信息
-            user = User.query.get(user_id)
-            return render_template('index.html', user=user)
-        return render_template('index.html')
+    @app.route('/<game_name>')
+    def show_game(game_name):
+        from application.models import WordlePuzzle
+        game = WordlePuzzle.query.filter_by(puzzle_name=game_name).first_or_404()
+        return render_template('play_game.html', game=game)
 
     return app

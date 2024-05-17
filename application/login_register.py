@@ -1,6 +1,5 @@
-from flask import Flask
-from flask import Blueprint, render_template, request, flash, redirect, url_for, session
-from werkzeug.security import generate_password_hash, check_password_hash
+from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify
+from flask_login import login_user
 from application.models import User
 from application import db
 
@@ -9,35 +8,25 @@ bp = Blueprint('login-register', __name__, url_prefix='/login-register')
 @bp.route('/', methods=['GET', 'POST'])
 def login_register():
     if request.method == 'POST':
-        if 'register' in request.form:
-            # Signup
+        form_type = request.form.get('form_type')
+        if form_type == 'register':
             username = request.form['username']
             email = request.form['email']
             password = request.form['password']
             user = User.query.filter_by(username=username).first()
             if user:
-                flash('Username already exists!')
-                return redirect(url_for('login-register.login_register'))
+                return jsonify(success=False, message='Username already exists!')
             new_user = User(username=username, email=email)
             new_user.set_password(password)
             db.session.add(new_user)
             db.session.commit()
-            flash('Registration successful.')
-            return redirect(url_for('login-register.login_register'))
-        elif 'login' in request.form:
-            # Login
+            return jsonify(success=True)
+        elif form_type == 'login':
             username = request.form['username']
             password = request.form['password']
             user = User.query.filter_by(username=username).first()
             if user and user.check_password(password):
-                session['user_id'] = user.user_id
-                flash('You have been successfully logged in.')
-                return redirect(url_for('index')) # Change 'index' to your homepage route
-            flash('Invalid username or password!')
+                login_user(user)
+                return jsonify(success=True)
+            return jsonify(success=False, message='Invalid username or password!')
     return render_template('login_register.html')
-
-def set_password(self, password):
-    self.password_hash = generate_password_hash(password)
-
-def check_password(self, password):
-    return check_password_hash(self.password_hash, password)

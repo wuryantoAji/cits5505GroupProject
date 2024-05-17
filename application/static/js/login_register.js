@@ -37,23 +37,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Redirect to game page if Guest button is clicked
   guestBtn.onclick = function () {
-    window.location.href = "/application/templates/puzzle_list.html";
+    window.location.href = "../../templates/puzzle_list.html";
   };
 });
 
-// jQuery -- AJAX Request
-
+// jQuery -- AJAX Request for login form
 $("#loginForm").submit(function (event) {
   event.preventDefault(); // block the default submission of the form
 
   $.ajax({
     type: "POST",
-    url: "/login-register/login_register",
-    data: $(this).serialize() + "&action=login", // a parameter to distinguish login
+    url: "/login-register/",
+    data: $(this).serialize() + "&form_type=login", // a parameter to distinguish login
     success: function (data) {
       console.log(data);
       if (data.success) {
-        window.location.href = "puzzle_list.html"; // jump to puzzle list page after login successfully
+        window.location.href = "../../templates/puzzle_list.html"; // jump to puzzle list page after login successfully
       } else {
         alert(data.message); // error message
       }
@@ -64,13 +63,14 @@ $("#loginForm").submit(function (event) {
   });
 });
 
+// jQuery -- AJAX Request for signup form
 $("#signupForm").submit(function (event) {
-  event.preventDefault(); // blcok default submission
+  event.preventDefault(); // block default submission
 
   $.ajax({
     type: "POST",
-    url: "/login-register/login_register",
-    data: $(this).serialize() + "&action=register", // a parameter distinguish register
+    url: "/login-register/",
+    data: $(this).serialize() + "&form_type=register", // a parameter to distinguish register
     success: function (data) {
       console.log(data);
       if (data.success) {

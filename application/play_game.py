@@ -10,7 +10,7 @@ from application import db
 
 bp = Blueprint('play-game', __name__, url_prefix='/play-game')
 
-@bp.route('/<string:puzzleName>', methods=['GET'])
+@bp.route('/<string:puzzleName>', methods=['GET','POST'])
 def playGame(puzzleName):
     gameBoard = WordlePuzzle.query.filter_by(puzzle_name=puzzleName).first()
     print(gameBoard)

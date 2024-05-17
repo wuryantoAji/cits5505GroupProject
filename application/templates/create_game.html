@@ -20,7 +20,7 @@
         <h1>Create Your Wordle Game</h1>
     </header>
     <div class="content">
-        <form action="/create_game" method="post">
+        <form action="{{ url_for('create_game.post_request') }}" method="POST">
             <label for="form_game_name">Please give a unique name for your wordle game:</label>
             <input type="text" name="form_game_name" placeholder="Please use letters and numbers" required><br><br>
 
