@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+    <link rel="stylesheet" href="../static/css/login_register.css"></script>
+  </head>
+  <nav>
+    <ul class="nav-list">
+        <li class="nav-home"><a href="/" class="nav-link" data-target="home"><img src="{{ url_for('static', filename='website_name_icon.png') }}" alt="Home Page"></a></li>
+        <li class="nav-button"><a href="/puzzle-list" class="nav-link" data-target="puzzle-list"><img src="{{ url_for('static', filename='navigation/nav_puzzle.png') }}" alt="Puzzle"></a></li>
+        <li class="nav-button"><a href="/create-game" class="nav-link" data-target="create-game"><img src="{{ url_for('static', filename='navigation/nav_create.png') }}" alt="Create"></a></li>
+        <li class="nav-button"><a href="/profile" class="nav-link" data-target="profile"><img src="{{ url_for('static', filename='navigation/nav_profile.png') }}" alt="Profile"></a></li>
+        <!--
+        <li class="nav-button"><a href="/leaderboard" class="nav-link" data-target="leaderboard"><img src="{{ url_for('static', filename='navigation/nav_score.png') }}" alt="Score"></a></li>
+        -->
+    </ul>
+</nav>
+  <body>
+    <img
+      id="background_login"
+      src="../static/loginpage/BACKGROUND-PIC.png"
+      alt="background picture with coconut tree, cloud and sea"
+    />
+    <img
+      class="website_name"
+      src="../static/loginpage/website name.png"
+      alt="website name: wordle game"
+    />
+    <img
+      class="login_button"
+      src="../static/loginpage/LOGIN.png"
+      alt="login button"
+    />
+    <img
+      class="signup_button"
+      src="../static/loginpage/SIGNUP.png"
+      alt="Sign up button"
+    />
+    <img
+      class="guest_button"
+      src="../static/loginpage/GUEST.png"
+      alt="guest button"
+    />
+    <img class="cat_image" src="../static/loginpage/CAT.png" alt="a gray cat" />
+  </body>
+</html>

@@ -8,7 +8,7 @@ from config import Config
 db = SQLAlchemy()
 migrate = Migrate()
 login_manager = LoginManager()
-
+Session(app)
 def create_app(config_class=Config):
     # create and configure the app
     app = Flask(__name__)
@@ -42,7 +42,10 @@ def create_app(config_class=Config):
 
     from . import login_register
     app.register_blueprint(login_register.bp)
-    login_manager.login_view = 'login-register' 
+    login_manager.login_view = 'login-register.login_register' 
+
+    from . import home
+    app.register_blueprint(home.bp_home)
 
     # 404 Error Handler
     @app.errorhandler(404)
