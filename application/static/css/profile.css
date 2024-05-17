@@ -1,0 +1,138 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  box-shadow: 0px 2px 4px #a69999;
+  padding: 10px 24px;
+  position: relative;
+  z-index: 1200;
+}
+
+header nav {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  width: 100%;
+}
+
+.website_name {
+  width: auto;
+  max-width: 178px;
+  flex-shrink: 0;
+}
+
+header nav img {
+  width: auto;
+  height: 40px;
+}
+
+.icon_score {
+  height: 37px;
+}
+
+header nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 10px;
+  flex-grow: 1;
+  justify-content: flex-end;
+}
+
+.username-section {
+  position: relative;
+  height: 180px;
+  background-image: url(../profile/name_background.PNG);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#username {
+  position: relative;
+  display: absolute;
+  top: 50%;
+  left: 10%;
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.username-section,
+.content {
+  background-color: #f4eeee;
+  position: relative;
+  z-index: 100;
+}
+
+.content {
+  display: flex;
+  justify-content: space-around;
+  padding: 5px 60px;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+.panel {
+  border: 2px solid #999595;
+  background-color: #fffefe;
+  margin: 10px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+  box-sizing: border-box;
+}
+
+#solved,
+#create-puzzle {
+  flex: 1 1 auto;
+  margin-right: 10px;
+}
+
+#score {
+  flex: 0.6 1 auto;
+}
+
+.panel h2 {
+  margin: 0;
+  position: relative;
+  display: flex;
+  top: 10%;
+}
+
+/**
+@media (max-width: 768px) {
+  .website_name,
+  header nav img,
+  .icon_score {
+    height: 30px;
+  }
+
+  #username {
+    font-size: 20px;
+  }
+
+  .username-section {
+    height: 150px;
+  }
+} */
+
+footer {
+  width: 100%;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  text-align: left;
+  background-color: white;
+  border-top: 1px solid #ccc;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  font-size: 16px;
+  z-index: 300;
+}
