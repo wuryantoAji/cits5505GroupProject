@@ -1,6 +1,5 @@
 import os
-
-from flask import Blueprint, Flask, request, current_app
+from flask import Blueprint, Flask, request, current_app,render_template
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -8,10 +7,7 @@ from config import Config
 
 db = SQLAlchemy()
 migrate = Migrate()
-
 login_manager = LoginManager()
-
-from application import models
 
 def create_app(config_class=Config):
     # create and configure the app
@@ -22,6 +18,15 @@ def create_app(config_class=Config):
     migrate.init_app(app, db)
     #new
     login_manager.init_app(app)
+    @login_manager.user_loader
+    @login_manager.user_loader
+    def load_user(user_id):
+        from application.models import User
+        return User.query.get(user_id)
+    with app.app_context():
+        from application.models import User
+        user = User.query.get(1)
+        print(user.username)
 
     # Import blueprints
     from . import puzzle_list_r
@@ -34,6 +39,10 @@ def create_app(config_class=Config):
 
     from . import create_game
     app.register_blueprint(create_game.bp_create)
+
+    from . import login_register
+    app.register_blueprint(login_register.bp)
+    login_manager.login_view = 'login-register' 
 
     # 404 Error Handler
     @app.errorhandler(404)

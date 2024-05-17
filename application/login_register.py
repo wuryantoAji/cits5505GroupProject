@@ -4,9 +4,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from application.models import User
 from application import db
 
+
 bp = Blueprint('login-register', __name__, url_prefix='/login-register')
 
-@bp.route('/login_register', methods=['GET', 'POST'])
+@bp.route('/', methods=['GET', 'POST'])
 def login_register():
     if request.method == 'POST':
         if 'register' in request.form:
