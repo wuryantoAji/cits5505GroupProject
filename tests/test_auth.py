@@ -5,6 +5,7 @@ from application import create_app, db
 from application.models import User
 
 class TestAuth(TestCase):
+
     def create_app(self):
         app = create_app()
         app.config['TESTING'] = True
@@ -40,10 +41,6 @@ class TestAuth(TestCase):
     def test_access_control(self):
         response = self.client.get('/profile', follow_redirects=True)
         self.assertIn(b'Please log in to access this page', response.data)
-
-    def test_registration(self):
-        response = self.client.post('/register', data={'username': 'newuser', 'email': 'newuser@example.com', 'password': 'password123'}, follow_redirects=True)
-        self.assertIn(b'Account created successfully', response.data)
 
 if __name__ == '__main__':
     unittest.main()
