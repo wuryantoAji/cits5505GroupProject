@@ -11,9 +11,6 @@ Group project for CITS5505 - Agile Web Development
 |   22609525   | Paskah Lin Shou Fa Ong |     opaskah     |
 |   23743373   |       Yuxin Gu         |    SoleilGU     |
 
-## Application Architecture Summary
-
-
 ## How to Launch Application
 1. Create virtual environment
     1. For Windows/Mac
@@ -31,24 +28,26 @@ Group project for CITS5505 - Agile Web Development
     > flask db upgrade
 6. Run the application 
     >   flask --app application run --debug
-7. Open the hello world url
-    1. Go to your browser and type http://localhost:5000/hello
+7. Open the login register url
+    1. Go to your browser and type http://localhost:5000/login-register/
+
 ## How to Run the Tests for the Application
 
 
 ## Page list
-- Introductory view -> describe context and application purpose and allowing user to create an account and login
-- Find Requests view -> allow user to search and accept requests
-- Create Requests view -> allow user to create request for other people to answer
+### Phase 1
+- Login Register Page -> a page that tells the user to login, register or continue as guest
+- All Puzzle Page ->  a page that shows all of the available puzzle in the database
+- Create Wordle Puzzle Page -> a page where user can submit their own wordle puzzle for other people to solve
+- Play Wordle Puzzle Page -> a page where user can play a wordle puzzle from the database
 
 ## Feature List
+### Phase 1
 - create account
 - log in account
-- search request
-- accept request (Need discussion on how to do this)
-- do request (Need discussion on how to do this)
-- create request
-- view my own request
+- search wordle puzzle by wordle name or user who created the wordle 
+- create wordle puzzle
+- play wordle puzzle
 
 ## Possible additional feature?
 - .....
