@@ -9,11 +9,11 @@
 <body>  
     <nav>
         <ul class="nav-list">
-            <li class="nav-home"><a href="#"><img src="{{ url_for('static', filename='website_name_icon.png') }}" alt="Home Page"></a></li>
-            <li class="nav-button"><a href="#"><img src="{{ url_for('static', filename='navigation/nav_puzzle.png') }}" alt="Puzzle"></a></li>
-            <li class="nav-button"><a href="#"><img src="{{ url_for('static', filename='navigation/nav_score.png') }}" alt="Score"></a></li>
-            <li class="nav-button"><a href="#"><img src="{{ url_for('static', filename='navigation/nav_create.png') }}" alt="Create"></a></li>
-            <li class="nav-button"><a href="#"><img src="{{ url_for('static', filename='navigation/nav_profile.png') }}" alt="Profile"></a></li>
+            <li class="nav-home"><a href="/" class="nav-link" data-target="home"><img src="{{ url_for('static', filename='website_name_icon.png') }}" alt="Home Page"></a></li>
+            <li class="nav-button"><a href="/puzzle-list" class="nav-link" data-target="puzzle-list"><img src="{{ url_for('static', filename='navigation/nav_puzzle.png') }}" alt="Puzzle"></a></li>
+            <li class="nav-button"><a href="/leaderboard" class="nav-link" data-target="leaderboard"><img src="{{ url_for('static', filename='navigation/nav_score.png') }}" alt="Score"></a></li>
+            <li class="nav-button"><a href="/create-game" class="nav-link" data-target="create-game"><img src="{{ url_for('static', filename='navigation/nav_create.png') }}" alt="Create"></a></li>
+            <li class="nav-button"><a href="/profile" class="nav-link" data-target="profile"><img src="{{ url_for('static', filename='navigation/nav_profile.png') }}" alt="Profile"></a></li>
         </ul>
     </nav>
     <header>
@@ -30,7 +30,7 @@
             <label for="form_number_of_attempts">How many attempts are allowed for your Wordle game:</label>
             <input type="number" name="form_number_of_attempts" placeholder="Please use a number" required><br><br>
 
-            <button class="icon-button"><div class="icon"></div>Submit and Create</button>
+            <button type="submit">Submit and Create</button>
         </form>
     </div>
 </body>

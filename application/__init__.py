@@ -1,12 +1,15 @@
 import os
 
 from flask import Blueprint, Flask, request, current_app
+from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from config import Config
 
 db = SQLAlchemy()
 migrate = Migrate()
+
+login_manager = LoginManager()
 
 from application import models
 
@@ -17,6 +20,8 @@ def create_app(config_class=Config):
 
     db.init_app(app)
     migrate.init_app(app, db)
+    #new
+    login_manager.init_app(app)
 
     # Import blueprints
     from . import puzzle_list_r
