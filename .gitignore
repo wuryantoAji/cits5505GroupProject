@@ -3,5 +3,5 @@ application/__pycache__/
 instance/
 __pycache__/
 app.db
-
+.env
 populateDBForTest.py

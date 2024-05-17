@@ -45,44 +45,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 $("#loginForm").submit(function (event) {
   event.preventDefault(); // block the default submission of the form
-
-  $.ajax({
-    type: "POST",
-    url: "/login-register/",
-    data: $(this).serialize() + "&action=login", // a parameter to distinguish login
-    success: function (data) {
-      console.log(data);
-      if (data.success) {
-        window.location.href = "/puzzle-list/"; // jump to puzzle list page after login successfully
-      } else {
-        alert(data.message); // error message
-      }
-    },
-    error: function (xhr, status, error) {
-      console.error("Error:", error);
-    },
-  });
+  document.getElementById('loginForm').submit();
 });
 
 $("#signupForm").submit(function (event) {
   event.preventDefault(); // blcok default submission
-
-  $.ajax({
-    type: "POST",
-    url: "/login-register/",
-    data: $(this).serialize() + "&action=register", // a parameter distinguish register
-    success: function (data) {
-      console.log(data);
-      if (data.success) {
-        $("#signupModal").hide(); // Hide register modal box
-        $("#loginModal").show(); // show login modal box
-        alert("Registration successful. Please log in."); // Prompts the user registered successfully and request a login
-      } else {
-        alert(data.message); // error message
-      }
-    },
-    error: function (xhr, status, error) {
-      console.error("Error:", error);
-    },
-  });
+  document.getElementById('signupForm').submit();
 });

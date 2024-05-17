@@ -12,6 +12,11 @@ bp = Blueprint('play-game', __name__, url_prefix='/play-game')
 
 @bp.route('/<string:puzzleName>', methods=['GET'])
 def playGame(puzzleName):
+    try:
+        user = session['user_id']
+        loginStatus = True
+    except KeyError: 
+        loginStatus = False
     gameBoard = WordlePuzzle.query.filter_by(puzzle_name=puzzleName).first()
     if(gameBoard is None):
         return redirect('/404')
@@ -24,10 +29,15 @@ def playGame(puzzleName):
         'score' : gameBoard.puzzle_score,
         'puzzle_id': gameBoard.puzzle_id  
     })
-    return render_template('play_game.html',puzzle=puzzlePayload)
+    return render_template('play_game.html',puzzle=puzzlePayload, isLogin = loginStatus)
 
 @bp.route('/submit-puzzle-answer/', methods=['POST'])
 def submitAnswer():
+    try:
+        user = session['user_id']
+        loginStatus = True
+    except KeyError: 
+        loginStatus = False
     dataPayload = request.get_json()
     puzzleId = dataPayload['puzzleID']
     guess = dataPayload['guess']
@@ -40,7 +50,6 @@ def submitAnswer():
         return("Not Enough Letter")
     result = []
     isSolved = True
-    isLogin = True
     saveToDB = True
     if (guess == solution):
         for elem in range(len(guess)):
@@ -58,27 +67,29 @@ def submitAnswer():
         if(remainingGuessByClient > 0):
             saveToDB = False
     # check if login
-    if(isLogin):
+    if(loginStatus):
         if(isSolved):
-            scoreData = ScoreTable.query.filter_by(user_id=1, puzzle_id=puzzleId).first()
+            scoreData = ScoreTable.query.filter_by(user_id=user, puzzle_id=puzzleId).first()
             if(scoreData is None):
-                scoreData = ScoreTable(user_id=1, puzzle_id=puzzleId, number_of_attempts=1, score_achieved=gameBoard.puzzle_score)
+                scoreData = ScoreTable(user_id=user, puzzle_id=puzzleId, number_of_attempts=1, score_achieved=gameBoard.puzzle_score)
                 db.session.add(scoreData)
             else:
                 scoreData.score_achieved = gameBoard.puzzle_score
                 scoreData.number_of_attempts += 1
+            flash("You guess it right!!", 'info')
             gameBoard.times_puzzle_played += 1
         else:
             if(saveToDB):
-                scoreData = ScoreTable.query.filter_by(user_id=1, puzzle_id=puzzleId).first()
+                scoreData = ScoreTable.query.filter_by(user_id=user, puzzle_id=puzzleId).first()
                 achievedScore = calculateScore(gameBoard.puzzle_score,result)
                 if(scoreData is None):
-                    scoreData = ScoreTable(user_id=1, puzzle_id=puzzleId, number_of_attempts=1, score_achieved=achievedScore) 
+                    scoreData = ScoreTable(user_id=user, puzzle_id=puzzleId, number_of_attempts=1, score_achieved=achievedScore) 
                     db.session.add(scoreData)
                 else:
                     scoreData.number_of_attempts += 1
                     if(achievedScore > scoreData.score_achieved):
                         scoreData.score_achieved = achievedScore
+                flash("You ran out of guess attempt.", 'info')
                 gameBoard.times_puzzle_played += 1
         db.session.commit()
     resultPayload = json.dumps({"puzzleGuess":result,

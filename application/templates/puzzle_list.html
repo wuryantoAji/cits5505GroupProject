@@ -45,7 +45,7 @@
                     {% set puzzle = puzzles[loop.index - 1] %}
                     <li  class="filterable">
                         <a href="/play-game/{{ puzzle.puzzle_name }}">
-                            {{ puzzle.puzzle_name }} by {{ puzzle.User.username }} - Attempts: {{ puzzle.number_of_attempt }}, Score: {{ puzzle.puzzle_score }}
+                            {{ puzzle.puzzle_name }} by {{ puzzle.User.username }} - Numbers Played: {{ puzzle.times_puzzle_played }}, Score: {{ puzzle.puzzle_score }}
                         </a>
                         <span style="color: transparent;">-</span>
                     </li>

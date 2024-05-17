@@ -18,6 +18,15 @@
     {% include "navbar.html" %}
     <div>
         <div id="board-keyboard-container">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
             <img id="playboard" src="{{ url_for('static', filename='gamepage/playboard_withscore.PNG') }}" alt="board-asset">
             <img id="title-frame" src="{{ url_for('static', filename='gamepage/title_frame.PNG') }}" alt="title-frame-asset">
             <h2 id="puzzle-name"></h2>
@@ -268,14 +277,10 @@
                 }
             });
             if(isSolved){
-                toastr.success("You guessed right! Game over!");
                 guessesRemaining = 0;
             } else {
                 currentGuess = [];
                 nextLetter = 0;
-                if (guessesRemaining === 0) {
-                    toastr.error("You've run out of guesses! Game over!");
-                }
             }
         }
         initBoard()
