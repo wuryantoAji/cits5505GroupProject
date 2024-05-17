@@ -17,6 +17,15 @@
       src="../static/loginpage/website name.png"
       alt="website name: wordle game"
     />
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
     <img
       class="login_button"
       src="../static/loginpage/LOGIN.png"
@@ -42,20 +51,14 @@
           Password: <input type="password" name="password" required /><br />
           <button type="submit">Login</button>
         </form> -->
-        <form id="loginForm">
-          <input
-            type="text"
-            name="username"
-            placeholder="Username"
-            required
-          /><br />
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            required
-          /><br />
-          <button type="submit"></button>
+        <form method="POST" action="/login-register" id="loginForm">
+          {{ loginForm.csrf_token }}
+          {{ loginForm.username(placeholder="Username") }}
+          <br />
+          {{ loginForm.password(placeholder="Password") }}
+          <br />
+          {{ loginForm.hiddenTag() }}
+          <button type="submit" value="login"></button>
         </form>
       </div>
     </div>
@@ -69,30 +72,26 @@
           Password: <input type="password" name="password" required /><br />
           <button type="submit">Sign Up</button>
         </form>-->
-        <form id="signupForm">
-          <input
-            type="text"
-            name="username"
-            placeholder="Username"
-            required
-          /><br />
-          <input type="email" name="email" placeholder="Email" required /><br />
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            required
-          /><br />
+        <form method="POST" action="/login-register" id="signupForm">
+          {{ registerForm.csrf_token }}
+          {{ registerForm.username(placeholder="Username") }}
+          <br />
+          {{ registerForm.email(placeholder="Email") }}
+          <br />
+          {{ registerForm.password(placeholder="Password") }}
+          <br />
           <input
             type="password"
             name="confirm_password"
             placeholder="Confirm Password"
             required
           /><br />
-          <button type="submit"></button>
+          {{ registerForm.hiddenTag() }}
+          <button type="submit" value="register"></button>
         </form>
       </div>
     </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script
       type="text/javascript"
       src="../static/js/login_register.js"

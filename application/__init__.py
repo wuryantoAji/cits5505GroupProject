@@ -1,6 +1,6 @@
 import os
 
-from flask import Blueprint, Flask, request, current_app
+from flask import Blueprint, Flask, request, current_app, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from config import Config
@@ -27,6 +27,8 @@ def create_app(config_class=Config):
     from . import play_game
     app.register_blueprint(play_game.bp)
 
+    from . import login_register
+    app.register_blueprint(login_register.bp)
     from . import create_game
     app.register_blueprint(create_game.bp_create)
 
