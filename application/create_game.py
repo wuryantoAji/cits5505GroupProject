@@ -11,7 +11,6 @@ from flask_login import login_user
 
 bp_create = Blueprint('create-game', __name__, url_prefix='/create-game')
 
-
 @bp_create.route('/', methods=['GET', 'POST'])
 @login_required
 def protect():
@@ -22,6 +21,9 @@ def protect():
     elif request.method == 'POST':
         return post_request()
     
+    return render_template('create-game.html')
+
+
 def get_request():
     target = request.args.get('target')
     if target == 'home':

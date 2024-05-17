@@ -5,7 +5,7 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-image: url('../background_score_list.png');
+    background-image: url("../loginpage/BACKGROUND-PIC.png");
     background-size: cover;
     background-position: center;
 }
@@ -14,7 +14,6 @@ nav {
     position: relative;
     background-color: transparent;
     width: 100%; 
-
 }
 
 ul.nav-list {
