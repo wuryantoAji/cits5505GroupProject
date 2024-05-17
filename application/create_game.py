@@ -1,12 +1,21 @@
 import os
 from flask import Blueprint, flash, redirect, render_template, request, session, url_for
 from flask_login import login_required, current_user
+from flask_wtf import FlaskForm
+from wtforms import (StringField, SubmitField, IntegerField)
+from wtforms.validators import InputRequired
 from datetime import date
 from application.models import User, WordlePuzzle
 from application import db
 from urllib.parse import quote
 
+class CreateGameForm(FlaskForm):
+    game_name = StringField('GameName', validators=[InputRequired()])
+    wordle_solution = StringField('Solution', validators=[InputRequired()])
+    number_of_attempt = IntegerField('NumberOfAttempt', validators=[InputRequired()])
+
 bp_create = Blueprint('create-game', __name__, url_prefix='/create-game')
+
 
 @bp_create.route('/', methods=['GET', 'POST'])
 @login_required
@@ -56,3 +65,4 @@ def post_request():
     db.session.commit()
 
     return redirect(game_url)
+

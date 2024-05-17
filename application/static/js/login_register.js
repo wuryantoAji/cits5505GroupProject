@@ -37,6 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Redirect to game page if Guest button is clicked
   guestBtn.onclick = function () {
+
     window.location.href = "../../templates/puzzle_list.html";
   };
 });
@@ -86,3 +87,4 @@ $("#signupForm").submit(function (event) {
     },
   });
 });
+
