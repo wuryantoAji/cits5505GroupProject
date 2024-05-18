@@ -40,24 +40,44 @@ body {
 
 .login_button {
   top: 38%;
-  left: 40%;
+  left: 50%;
 }
 .signup_button {
   top: 54%;
-  left: 38%;
+  left: 48%;
 }
 .guest_button {
   top: 70%;
-  left: 40%;
+  left: 50%;
 }
 
 .cat_image {
+  width: 10%;
   z-index: 1;
   display: block;
   position: absolute;
-  top: 53.5%;
-  left: 10%;
+  top: 62%;
+  left: 4%;
 }
+
+.introchat {
+  width: 33%;
+  z-index: 1;
+  display: block;
+  position: absolute;
+  top: 30%;
+  left: 15%;
+}
+
+.introword {
+  width: 27%;
+  z-index: 2;
+  display: block;
+  position: absolute;
+  top: 40%;
+  left: 18%;
+}
+
 /** developing: the components should be responsive -- when the browser border changes**/
 
 /**modal popups setting for login and signup**/

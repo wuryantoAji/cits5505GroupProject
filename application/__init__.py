@@ -34,8 +34,6 @@ def create_app(config_class=Config):
     app.register_blueprint(play_game.bp)
     from . import create_game
     app.register_blueprint(create_game.bp_create)
-    from . import login_register
-    app.register_blueprint(login_register.bp)
     from . import leaderboard
     app.register_blueprint(leaderboard.bp_ldboard)    
     from . import profile

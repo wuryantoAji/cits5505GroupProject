@@ -20,16 +20,16 @@
 </nav>
 <header>
     <h1>Leaderboard</h1>
-    <input type="text" id="searchInput" onkeyup="filterItems()" placeholder="Search for Wordle Game Name...">
+    <input type="text" id="searchInput" onkeyup="filterItems()" placeholder="Search for User Name...">
 </header>
 <body>
     <div class="wooden">
         <h2><img src="../static/puzzle_list/line.png"></h2>
         <ul id="itemList">
-            {% for game in games %}
+            {% for user in users %}
                 <li class="filterable">
-                    <a href="/profile/{{ game.username }}">
-                        {{ game.puzzle_name }} - Total Score: {{ game.scores }} - Maker: {{ game.username }}
+                    <a href="/profile/{{ user.username }}">
+                        {{ user.username }} - Total Score: {{ user.overall_score }}}
                     </a>
                 </li>
                 {% if loop.index < 10 %}
