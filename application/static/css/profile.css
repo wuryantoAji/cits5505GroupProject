@@ -3,6 +3,7 @@ html {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
+  background-color: #f4eeee;
 }
 
 header {
@@ -58,6 +59,7 @@ header nav ul {
   display: absolute;
   top: 50%;
   left: 10%;
+  padding-left: 2%;
   color: white;
   font-size: 40px;
   font-weight: bold;
@@ -123,6 +125,7 @@ header nav ul {
   display: flex;
   align-items: center;
   flex-direction: column;
+  background-color: #f4eeee;
 }
 footer {
   width: 100%;

@@ -10,29 +10,29 @@ height: 100vh; /* Adjust as needed */
 
 #title-frame {
 position: absolute;
-top: 5%;
+top: 10%;
 left: 50%;
 transform: translate(-50%, -50%);
 }
 
 #puzzle-name {
 position: absolute;
-top: 5%;
+top: 10%;
 left: 50%;
 transform: translate(-50%, -50%);
 }
 
 #puzzle-score {
 position: absolute;
-top: 47%;
-left: 19.5%;
+top: 55%;
+left: 16.5%;
 transform: translate(-50%, -50%);
 color: white;
 }
 
 #playboard {
 position: absolute;
-top: 50%;
+top: 57%;
 left: 48%;
 transform: translate(-50%, -50%);
 }
@@ -45,12 +45,11 @@ flex-direction: column;
 
 .scrollable-container {
     position: absolute;
-    top: 23%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -15%);
     width: 50%; /* Set the width of the container */
     height: 50%; /* Set the height of the container */
-    border: 1px solid #ccc; /* Optional: border for the container */
     padding: 10px; /* Optional: padding for the container */
     overflow: auto; /* Makes overflow items scrollable */
     white-space: nowrap; /* Prevents content from wrapping to test horizontal scrolling */
@@ -58,7 +57,7 @@ flex-direction: column;
 
 #keyboard-cont {
 position: absolute;
-top: 80%;
+top: 87%;
 left: 50%;
 transform: translate(-50%, -50%);
 margin: 1rem 0;
