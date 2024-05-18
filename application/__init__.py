@@ -31,6 +31,9 @@ def create_app(config_class=Config):
     app.register_blueprint(login_register.bp)
     from . import create_game
     app.register_blueprint(create_game.bp_create)
+    
+    from . import profile
+    app.register_blueprint(profile.bp)
 
     # 404 Error Handler
     @app.errorhandler(404)
