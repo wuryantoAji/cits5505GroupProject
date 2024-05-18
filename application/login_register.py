@@ -54,4 +54,4 @@ def login_register():
     elif request.method == 'GET':
         return render_template('login_register.html', loginForm=loginForm, registerForm=registerForm)
 
-  
+#developing: strict authentication - protect from XSS/ SQL inject; safety--https; more complex password + reset password; 
