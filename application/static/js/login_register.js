@@ -41,14 +41,16 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 });
 
-// jQuery -- AJAX Request
-
+// jQuery -- AJAX Request for login form
 $("#loginForm").submit(function (event) {
   event.preventDefault(); // block the default submission of the form
+
   document.getElementById('loginForm').submit();
 });
 
+// jQuery -- AJAX Request for signup form
 $("#signupForm").submit(function (event) {
+
   event.preventDefault(); // blcok default submission
   document.getElementById('signupForm').submit();
 });
