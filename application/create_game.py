@@ -30,7 +30,6 @@ def index():
 
 @bp_create.route('/create_game', methods=['POST'])
 def create_game():
-    print("cek")
     createGame = CreateGameForm()
     user = session['user_id']
     game_name = createGame.game_name.data

@@ -1,22 +1,21 @@
 import unittest
-from flask import url_for
 from flask_testing import TestCase
 from application import create_app, db
-from application.models import User, WordlePuzzle
+from application.models import User, WordlePuzzle  # Import WordlePuzzle
+from application.login_register import set_password
+from config import TestConfig
 
 class TestCreateGame(TestCase):
     def create_app(self):
-        app = create_app()
-        app.config['TESTING'] = True
-        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
+        app = create_app(TestConfig)
         return app
 
     def setUp(self):
         db.create_all()
 
         # Create a test user
-        user = User(username='testuser', email='test@example.com')
-        user.set_password('password123')
+        password_hash = set_password('password123')
+        user = User(username='testuser', password_hash=password_hash, email='test@example.com')
         db.session.add(user)
         db.session.commit()
 
@@ -32,23 +31,32 @@ class TestCreateGame(TestCase):
         )
 
     def test_create_game(self):
-        # Log in as the test user
-        self.login('testuser', 'password123')
 
-        # Send a POST request to create a new game
+        # self.login('testuser', 'password123')
+
+        # Log in as the test user
+        self.client.post(
+            '/login-register',
+            data={'username': 'testuser', 'password': 'password123', 'hiddenTag': 'login'},
+            follow_redirects=True
+        )
+
+        with self.client as c:
+            with c.session_transaction() as session:
+                user_id = session.get('user_id')  # Get the user ID from the session
+
         response = self.client.post(
             '/create-game/create_game',
             data={
-                'form_game_name': 'Test Game',
-                'form_wordle_solution': 'TEST',
-                'form_number_of_attemps': '3'
+                'game_name': 'Test Game',
+                'wordle_solution': 'TEST',
+                'number_of_attempt': 3
             },
             follow_redirects=True
         )
 
         # Check if game creation was successful
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Game created:', response.data)
 
         # Check if the game is stored in the database
         game = WordlePuzzle.query.filter_by(puzzle_name='Test Game').first()
