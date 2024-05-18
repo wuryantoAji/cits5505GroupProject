@@ -15,7 +15,7 @@
   <body>
     {% include "navbar.html" %}
     <div class="username-section">
-      <span id="username">{{ username }}</span>
+      <span id="username">{{ profileUsername }}</span>
   </div>
     </div>
     <div class="content">
@@ -46,9 +46,13 @@
         </div>
       </div>
     </div>
+    {% if isLogin==True %}
     <div class="logout">
-      <button class="btn btn-danger" style="margin:2%">Logout</button>
+      <form method="POST" action="{{ url_for('profile.logout') }}">
+        <button class="btn btn-danger" style="margin:2%" type="submit">Logout</button>
+      </form>
     </div>
+    {% endif %}
     {% include "footer.html" %}
   </body>
 </html>
