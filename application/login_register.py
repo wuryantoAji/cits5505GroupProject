@@ -48,6 +48,7 @@ def login_register():
             if user and user.check_password(password):
                 session['user_id'] = user.user_id
                 flash('You have been successfully logged in.','message')
+                login_user(user)
                 return redirect(url_for('puzzle-list.index'))
             flash('Invalid username or password!','error')
             return redirect(url_for('login-register.login_register'))
