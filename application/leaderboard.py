@@ -8,12 +8,10 @@ bp_ldboard = Blueprint('leaderboard', __name__, url_prefix="/leaderboard")
 @bp_ldboard.route('/')
 def ranking():
 
-    games = db.session.query(
-        WordlePuzzle.puzzle_name.label('puzzle_name'),
-        WordlePuzzle.scores.label('scores'),
-        WordlePuzzle.puzzle_id.label('puzzle_id'),
-        User.username.label('username'),
-    ).join(User, WordlePuzzle.user_id == User.user_id).order_by(desc(WordlePuzzle.scores)).limit(5).all()
-
-    return render_template('leaderboard.html', games=games)
+    users= db.session.query(
+        User.username,
+        User.overall_score,
+    ).order_by(desc(User.overall_score)).limit(5)
+    
+    return render_template('leaderboard.html', users=users)
 
