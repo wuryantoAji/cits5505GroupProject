@@ -1,4 +1,4 @@
-from flask import Flask
+最新版from flask import Flask
 from flask_login import login_user
 from flask import Flask, Blueprint, render_template, request, flash, redirect, url_for, session, json
 from flask_wtf import FlaskForm
@@ -55,3 +55,4 @@ def login_register():
         return render_template('login_register.html', loginForm=loginForm, registerForm=registerForm)
 
   
+
