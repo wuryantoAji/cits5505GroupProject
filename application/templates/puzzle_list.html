@@ -8,6 +8,47 @@
     <link rel="stylesheet" href="../static/css/wordle_game.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="../static/puzzle_list/footer_styles.css"/>
+    <style>
+
+        #searchInput {
+            top: 360px; /* Adjust the top position as per your requirement */
+            left: 1000px; /* Adjust the left position as per your requirement */
+    
+            background-image: url('../static/searchbar/searchbar_total1.PNG');
+            background-size: cover; /* Adjust the size as needed */
+            background-repeat: no-repeat;
+            background-position: center; /* Adjust position of the image */
+            padding-left: 25px;
+            padding-right: 35px; /* Leave space for the search icon */
+            border: 1px solid #ccc; /* Add border for better appearance */
+            border-radius: 5px; /* Add rounded corners */
+            height: 45px; /* Adjust height as needed */
+            width: 300px; /* Adjust width as needed */
+        }
+    
+    
+        .wooden {
+            background-image: url('../static/leaderboard/wooden_frame.png'); /* Replace 'background_image.jpg' with your image file */
+            background-size: 85%; /* This makes sure the background image covers the entire area of the h1 tag */
+            background-repeat: no-repeat;
+            background-position: center; /* Center the background image */
+            padding: 20px; /* Adding some padding to give space around the content */
+            text-align: center; /* Centering the content */
+            width: 90%;
+            height: auto;
+        }
+    
+        .wooden h1 {
+            margin-top: 100px; /* Adjust the space between the top of the container and the h1 text */
+            line-height: 1.5; /* Adjust the line height to lower the text */
+        }
+    
+        .wooden ul {
+            list-style: none; /* Remove default list styles */
+            padding: 0; /* Remove default padding */
+        }
+    
+    </style>
 </head>
 <body background="{{ url_for('static', filename='background_score_list.png') }}" style="background-size: cover;">
     
@@ -15,9 +56,9 @@
     <div style="display: flex;justify-content: center;align-items: center;flex-direction: column;">
         <div class="wooden">
             
-            <h1><img src="../static/puzzle_list/Puzzle List.png"></h1>
+            <h1><img src="../static/puzzle_list/Puzzle_List.png" alt="puzzle list"></h1>
             <input type="text" id="searchInput" onkeyup="filterItems()" placeholder="Search for puzzles...">
-            <h2><img src="../static/puzzle_list/line.png"></h2>
+            <h2><img src="../static/puzzle_list/line.png" alt="separator"></h2>
 
             <!-- <ul class="list1">
                 {% for i in range(11) %}
@@ -134,51 +175,4 @@
         }
     }
 </script> -->
-
-
-
-
-    
-<style>
-
-    #searchInput {
-        top: 360px; /* Adjust the top position as per your requirement */
-        left: 1000px; /* Adjust the left position as per your requirement */
-
-        background-image: url('../static/searchbar/searchbar_total1.PNG');
-        background-size: cover; /* Adjust the size as needed */
-        background-repeat: no-repeat;
-        background-position: center; /* Adjust position of the image */
-        padding-left: 25px;
-        padding-right: 35px; /* Leave space for the search icon */
-        border: 1px solid #ccc; /* Add border for better appearance */
-        border-radius: 5px; /* Add rounded corners */
-        height: 45px; /* Adjust height as needed */
-        width: 300px; /* Adjust width as needed */
-    }
-
-
-    .wooden {
-        background-image: url('../static/leaderboard/wooden_frame.png'); /* Replace 'background_image.jpg' with your image file */
-        background-size: 85%; /* This makes sure the background image covers the entire area of the h1 tag */
-        background-repeat: no-repeat;
-        background-position: center; /* Center the background image */
-        padding: 20px; /* Adding some padding to give space around the content */
-        text-align: center; /* Centering the content */
-        width: 90%;
-        height: auto;
-    }
-
-    .wooden h1 {
-        margin-top: 100px; /* Adjust the space between the top of the container and the h1 text */
-        line-height: 1.5; /* Adjust the line height to lower the text */
-    }
-
-    .wooden ul {
-        list-style: none; /* Remove default list styles */
-        padding: 0; /* Remove default padding */
-    }
-
-</style>
-
 </html>
