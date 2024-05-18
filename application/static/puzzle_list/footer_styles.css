@@ -31,7 +31,6 @@
 body {
     position: relative; /* Set the body as a relative positioning context */
     margin: 0; /* Resetting default margin */
-    padding-bottom: 60px; /* Adjust this value according to your footer height */
 }
 
 footer {
@@ -41,6 +40,4 @@ footer {
     width: 100%; /* Make the footer stretch the entire width */
     background-color: #d1e6ff;
     color: rgb(0, 0, 0);
-    padding: 10px;
-    text-align: center;
 }

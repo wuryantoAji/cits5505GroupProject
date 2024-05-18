@@ -49,5 +49,5 @@ def create_game():
     db.session.add(new_game)
     db.session.commit()
     
-    flash(f"Game created: <a href='{game_url}'> </a>",'info')
+    flash(f"{game_url}",'info')
     return redirect(url_for('create-game.index'))

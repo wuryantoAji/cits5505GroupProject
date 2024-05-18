@@ -12,7 +12,7 @@
         }
 
         input[type="text"], input[type="number"] {
-            width: 100%;
+            width: 60%;
             padding: 12px 20px;
             margin: 8px 0;
             box-sizing: border-box;
@@ -20,13 +20,14 @@
             border-radius: 4px;
             background-color: #f8f8f8;
             background-image: url('/static/gamepage/commentboard.png');
-            background-size: 30px 30px;
+            background-size: cover;
+            background-repeat: no-repeat;
             background-position: 10px center;
             padding-left: 45px;
         }
 
         button {
-            width: calc(100% - 40px);
+            width: 60%;
             padding: 14px 20px;
             background-color: #4CAF50;
             color: white;
@@ -68,25 +69,30 @@
         {% if messages %}
             {% for category, message in messages %}
                 <div class="alert alert-{{ category }}">
-                    {{ message }}
+                    <p>Game created at {{ message }}</a>
                 </div>
             {% endfor %}
         {% endif %}
     {% endwith %}
-    <h1>Create Your Wordle Game</h1>
-    <form action="/create-game/create_game" method="post" id="createGameForm">
-        {{ createGame.csrf_token }}
-        <label for="form_game_name">Please give a unique name for your wordle game:</label>
-        {{ createGame.game_name(placeholder="Please use letters and numbers") }}<br><br>
+    <div class="container">
+        <h1>Create Your Wordle Game</h1>
+        <form action="/create-game/create_game" method="post" id="createGameForm">
+            {{ createGame.csrf_token }}
+            <label for="form_game_name">Please give a unique name for your wordle game:</label>
+            <br>
+            {{ createGame.game_name(placeholder="Please use letters and numbers") }}<br><br>
 
-        <label for="form_wordle_solution">Please type in the correct Wordle solution:</label>
-        {{ createGame.wordle_solution(placeholder="Please use a real word") }}<br><br>
+            <label for="form_wordle_solution">Please type in the correct Wordle solution:</label>
+            <br>
+            {{ createGame.wordle_solution(placeholder="Please use a real word") }}<br><br>
 
-        <label for="form_number_of_attempts">How many attempts are allowed for your Wordle game:</label>
-        {{ createGame.number_of_attempt(placeholder="Please use a number") }}<br><br>
+            <label for="form_number_of_attempts">How many attempts are allowed for your Wordle game:</label>
+            <br>
+            {{ createGame.number_of_attempt(placeholder="Please use a number") }}<br><br>
 
-        <button type="submit">Submit and Create</button>
-    </form>
+            <button type="submit">Submit and Create</button>
+        </form>
+    </div>
     {% include "footer.html" %}
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     {% block javascript %}

@@ -1,13 +1,74 @@
-<header class="d-flex flex-wrap justify-content-center mb-4 border-bottom">
-    <a href="/login-register/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-        <img src="{{ url_for('static', filename='website_name_icon.png') }}" style="width:200px;height:50;">
-    </a>
-    <ul class="nav nav-pills">
-        <li class="nav-item"><a href="/puzzle-list/" class="nav-link"><img src="{{ url_for('static', filename='navigation/nav_puzzle.PNG') }}" style="width:200px;"></a></li>
-        <li class="nav-item"><a href="#" class="nav-link"><img src="{{ url_for('static', filename='navigation/nav_score.PNG') }}" style="width:200px;"></a></li>
+<head>
+    <style>        
+        header {
+        position: relative;
+        z-index: 1200;
+        }
+
+        header nav {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding: 1%;
+        }
+
+        .website_name {
+        width: auto;
+        max-width: 178px;
+        flex-shrink: 0;
+        }
+
+        header nav img {
+        width: auto;
+        height: 40px;
+        }
+
+        .icon_score {
+        height: 37px;
+        }
+
+        header nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        gap: 10px;
+        flex-grow: 1;
+        justify-content: flex-end;
+        }
+    </style>
+</head>
+<header>
+    <nav>
+      <a href="/login-register/">
+        <img  class="website_name"
+            src="../static/website_name_icon.png"
+            alt="Wordle Game website Logo"
+        />
+      </a>
+      <ul>
+        <li>
+          <a href="/puzzle-list/"
+            ><img src="../static/navigation/nav_puzzle.PNG" alt="Puzzle"
+          /></a>
+        </li>
+        <li>
+          <a href="#score"
+            ><img class="icon_score"  src="../static/navigation/nav_score1.PNG" alt="Score"
+          /></a>
+        </li>
         {% if isLogin==True %}
-        <li class="nav-item"><a href="/create-game/" class="nav-link"><img src="{{ url_for('static', filename='navigation/nav_create.PNG') }}" style="width:200px;"></a></li>
-        <li class="nav-item"><a href="#" class="nav-link"><img src="{{ url_for('static', filename='navigation/nav_profile.PNG') }}" style="width:200px;"></a></li>
+        <li>
+          <a href="/create-game/"
+            ><img src="../static/navigation/nav_create.PNG" alt="Create"
+          /></a>
+        </li>
+        <li>
+          <a href="/profile/"
+            ><img src="../static/navigation/nav_profile.PNG" alt="Profile"
+          /></a>
+        </li>
         {% endif %}
-    </ul>
-</header>
+      </ul>
+    </nav>
+  </header>
