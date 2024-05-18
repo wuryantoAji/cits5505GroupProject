@@ -35,7 +35,7 @@ body {
 }
 
 footer {
-    position: absolute;
+    position: fixed;
     bottom: 0; /* Align the bottom edge of the footer with the bottom edge of the body */
     left: 0; /* Align the left edge of the footer with the left edge of the body */
     width: 100%; /* Make the footer stretch the entire width */

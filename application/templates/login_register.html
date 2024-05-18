@@ -4,49 +4,98 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login and Register Page</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/login_register.css') }}">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/login_register.js') }}"></script>
-</head>
-<body>
-    <!-- Flash messages -->
-    {% for message in get_flashed_messages() %}
-      <div>{{ message }}</div>
-    {% endfor %}
-
-    <img id="background_login" src="{{ url_for('static', filename='loginpage/BACKGROUND-PIC.png') }}" alt="background picture with coconut tree, cloud and sea">
-    <img class="website_name" src="{{ url_for('static', filename='loginpage/website name.png') }}" alt="website name: wordle game">
-    <img class="login_button" src="{{ url_for('static', filename='loginpage/LOGIN.png') }}" alt="login button">
-    <img class="signup_button" src="{{ url_for('static', filename='loginpage/SIGNUP.png') }}" alt="Sign up button">
-    <img class="guest_button" src="{{ url_for('static', filename='loginpage/GUEST.png') }}" alt="guest button">
-    <img class="cat_image" src="{{ url_for('static', filename='loginpage/CAT.png') }}" alt="a gray cat">
-
+    <link rel="stylesheet" href="../static/css/login_register.css"></script>
+  </head>
+  <body>
+    <img
+      id="background_login"
+      src="../static/loginpage/BACKGROUND-PIC.png"
+      alt="background picture with coconut tree, cloud and sea"
+    />
+    <img
+      class="website_name"
+      src="../static/loginpage/website name.png"
+      alt="website name: wordle game"
+    />
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <img
+      class="login_button"
+      src="../static/loginpage/LOGIN.png"
+      alt="login button"
+    />
+    <img
+      class="signup_button"
+      src="../static/loginpage/SIGNUP.png"
+      alt="Sign up button"
+    />
+    <img
+      class="guest_button"
+      src="../static/loginpage/GUEST.png"
+      alt="guest button"
+    />
+    <img class="cat_image" src="../static/loginpage/CAT.png" alt="a gray cat" />
     <!-- The Login Modal -->
     <div id="loginModal" class="modal">
-        <div class="modal-login-content">
-            <span class="close loginClose">&times;</span>
-            <form id="loginForm" method="POST">
-                <input type="hidden" name="form_type" value="login">
-                <input type="text" name="username" placeholder="Username" required><br>
-                <input type="password" name="password" placeholder="Password" required><br>
-                <button type="submit"></button>
-            </form>
-        </div>
+      <div class="modal-login-content">
+        <span class="close loginClose">&times;</span>
+        <!--<form id="loginForm">
+          Username: <input type="text" name="username" required /><br />
+          Password: <input type="password" name="password" required /><br />
+          <button type="submit">Login</button>
+        </form> -->
+        <form method="POST" action="/login-register" id="loginForm">
+          {{ loginForm.csrf_token }}
+          {{ loginForm.username(placeholder="Username") }}
+          <br />
+          {{ loginForm.password(placeholder="Password") }}
+          <br />
+          {{ loginForm.hiddenTag() }}
+          <button type="submit" value="login"></button>
+        </form>
+      </div>
     </div>
 
     <!-- Sign up Modal -->
     <div id="signupModal" class="modal">
-        <div class="modal-signup-content">
-            <span class="close signupClose">&times;</span>
-            <form id="signupForm" method="POST">
-                <input type="hidden" name="form_type" value="register">
-                <input type="text" name="username" placeholder="Username" required><br>
-                <input type="email" name="email" placeholder="Email" required><br>
-                <input type="password" name="password" placeholder="Password" required><br>
-                <input type="password" name="confirm_password" placeholder="Confirm Password" required><br>
-                <button type="submit"></button>
-            </form>
-        </div>
+      <div class="modal-signup-content">
+        <span class="close signupClose">&times;</span>
+        <!--<form id="signupForm">
+          Username: <input type="text" name="username" required /><br />
+          Email: <input type="email" name="email" required /><br />
+          Password: <input type="password" name="password" required /><br />
+          <button type="submit">Sign Up</button>
+        </form>-->
+        <form method="POST" action="/login-register" id="signupForm">
+          {{ registerForm.csrf_token }}
+          {{ registerForm.username(placeholder="Username") }}
+          <br />
+          {{ registerForm.email(placeholder="Email") }}
+          <br />
+          {{ registerForm.password(placeholder="Password") }}
+          <br />
+          <input
+            type="password"
+            name="confirm_password"
+            placeholder="Confirm Password"
+            required
+          /><br />
+          {{ registerForm.hiddenTag() }}
+          <button type="submit" value="register"></button>
+        </form>
+      </div>
     </div>
-</body>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script
+      type="text/javascript"
+      src="../static/js/login_register.js"
+    ></script>
+  </body>
 </html>
