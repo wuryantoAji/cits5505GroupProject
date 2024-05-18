@@ -11,4 +11,5 @@ def index():
     except KeyError: 
         loginStatus = False
     puzzles = WordlePuzzle.query.all()
+    print(puzzles)
     return render_template('puzzle_list.html', puzzles=puzzles, isLogin = loginStatus)
