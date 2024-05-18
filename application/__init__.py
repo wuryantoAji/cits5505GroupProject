@@ -38,8 +38,6 @@ def create_app(config_class=Config):
     app.register_blueprint(create_game.bp_create)
     from . import login_register
     app.register_blueprint(login_register.bp)
-    from . import home
-    app.register_blueprint(home.bp_home)
     from . import leaderboard
     app.register_blueprint(leaderboard.bp_ldboard)
     # 404 Error Handler
