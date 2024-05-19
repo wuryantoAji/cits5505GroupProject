@@ -17,37 +17,6 @@
     <link 
         rel="stylesheet" 
         href="../static/puzzle_list/footer_styles.css"/>
-    <script>
-        function checkInput() {
-            const puzzleSolution = document.forms["gameForm"]["form_wordle_solution"].value;
-            const solutionPattern = /^[a-zA-Z]+$/;
-            const number_of_attempts = document.forms["gameForm"]["form_number_of_attempts"].value
-
-            document.getElementById("nameError").innerText = "";
-            document.getElementById("solutionError").innerText = "";
-            document.getElementById("attemptsError").innerText = "";
-
-            if (!solutionPattern.test(puzzleSolution)) {
-                document.getElementById("solutionError").style.display = "Puzzle solution uses only letters";
-                return false;
-            }
-            if (puzzleSolution.length > 15) {
-                document.getElementById("solutionError").style.display = "Puzzle solution no longer than 15 letters.";
-                return false;
-            }
-            if (puzzleName.length > 15) {
-                document.getElementById("nameError").style.display = "Puzzle name no longer than 15 letters";
-                return false;
-            }
-            if (isNaN(numberOfAttempts) || numberOfAttempts <= 0) {
-                document.getElementById("attemptsError").style.display = "Number of attempts must be greater than 0.";
-                return false;
-            }
-            return true;
-        }
-    </script>
-    
-
 </head>
 <body>  
     {% include "navbar.html" %}
@@ -55,7 +24,7 @@
       <h1>Create Your Wordle Game</h1>
     </header>
     <div class="content">
-        <form action="{{ url_for('create-game.protect') }}" method="POST" onsubmit="return checkInpot()">
+        <form action="{{ url_for('create-game.protect') }}" method="POST" onsubmit="return checkInput()">
             <div class="mb-3">
                 <label for="form_game_name">
                     Please give a unique name for your wordle game:
@@ -103,5 +72,34 @@
         </form>
     </div>
     {% include "footer.html" %}
+    <script>
+        function checkInput() {
+            const puzzleSolution = document.forms["gameForm"]["form_wordle_solution"].value;
+            const solutionPattern = /^[a-zA-Z]+$/;
+            const number_of_attempts = document.forms["gameForm"]["form_number_of_attempts"].value
+
+            document.getElementById("nameError").innerText = "";
+            document.getElementById("solutionError").innerText = "";
+            document.getElementById("attemptsError").innerText = "";
+
+            if (!solutionPattern.test(puzzleSolution)) {
+                document.getElementById("solutionError").style.display = "Puzzle solution uses only letters";
+                return false;
+            }
+            if (puzzleSolution.length > 15) {
+                document.getElementById("solutionError").style.display = "Puzzle solution no longer than 15 letters.";
+                return false;
+            }
+            if (puzzleName.length > 15) {
+                document.getElementById("nameError").style.display = "Puzzle name no longer than 15 letters";
+                return false;
+            }
+            if (isNaN(numberOfAttempts) || numberOfAttempts <= 0) {
+                document.getElementById("attemptsError").style.display = "Number of attempts must be greater than 0.";
+                return false;
+            }
+            return true;
+        }
+    </script>
 </body>
 </html>
