@@ -60,11 +60,16 @@ Group project for CITS5505 - Agile Web Development
 - see user profile
 - see leaderboard score
 
+### Final
+- bug fix for backend logic
+- adding unit test and coverage
+
 ## Possible additional feature?
 - valid word checker when creating puzzle
 - valid word checker when submitting guess
 - give hint to the user
 - automatically give difficulty tag to the puzzle based on number of letter and number of guess
+- fix front end bugs mostly on flash messages
 
 References for asset
 1. login_bar & signup_bar : https://m.twitch.tv/nojamjess/about
