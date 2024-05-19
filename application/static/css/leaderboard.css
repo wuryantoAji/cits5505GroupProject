@@ -7,7 +7,7 @@ body {
   margin: 0;
   background-image: url("../loginpage/BACKGROUND-PIC.png");
   background-size: cover;
-  background-position: relative;
+  background-position: relative; /**invalid**/
 }
 
 header {
@@ -19,17 +19,19 @@ header {
   background-color: transparent;
   padding: 10px;
   text-align: center;
+}
+/* Question: why Nesting an ID selector inside another selector, this is not a CSS style, it's a function of SASS/LESS.
+   I just seperate these ID selector from "header". */
 
-  #searchInput {
-    font-size: 1em;
-    width: 100%;
-    padding: 8px;
-  }
+#searchInput {
+  font-size: 1em;
+  width: 100%;
+  padding: 8px;
+}
 
-  #searchInput::placeholder {
-    font-size: 1em;
-    color: #bcbaba;
-  }
+#searchInput::placeholder {
+  font-size: 1em;
+  color: #bcbaba;
 }
 
 .wooden {

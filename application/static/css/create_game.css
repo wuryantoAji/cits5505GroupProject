@@ -7,7 +7,7 @@ body {
   margin: 0;
   background-image: url("../loginpage/BACKGROUND-PIC.png");
   background-size: cover;
-  background-position: relative;
+  background-position: relative; /**same problem as leaderboard.css, this is invalid.**/
 }
 
 header {
