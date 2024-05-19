@@ -11,41 +11,58 @@
     <style>
 
         #searchInput {
-            top: 360px; /* Adjust the top position as per your requirement */
-            left: 1000px; /* Adjust the left position as per your requirement */
+            top: 360px;
+            left: 1000px;
     
             background-image: url('../static/searchbar/searchbar_total1.PNG');
-            background-size: cover; /* Adjust the size as needed */
+            background-size: cover;
             background-repeat: no-repeat;
-            background-position: center; /* Adjust position of the image */
+            background-position: center;
             padding-left: 25px;
-            padding-right: 35px; /* Leave space for the search icon */
-            border: 1px solid #ccc; /* Add border for better appearance */
-            border-radius: 5px; /* Add rounded corners */
-            height: 45px; /* Adjust height as needed */
-            width: 300px; /* Adjust width as needed */
+            padding-right: 35px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            height: 45px;
+            width: 300px;
         }
     
     
         .wooden {
-            background-image: url('../static/leaderboard/wooden_frame.png'); /* Replace 'background_image.jpg' with your image file */
-            background-size: 85%; /* This makes sure the background image covers the entire area of the h1 tag */
+            background-image: url('../static/leaderboard/wooden_frame.png');
+            background-size: 70%;
             background-repeat: no-repeat;
-            background-position: center; /* Center the background image */
-            padding: 20px; /* Adding some padding to give space around the content */
-            text-align: center; /* Centering the content */
+            background-position: center;
+            padding: 20px;
+            text-align: center;
             width: 90%;
             height: auto;
         }
+
+        .l-line img {
+            width: 50%;
+            height: 50%;
+        }
+
+        .dash-line img {
+            width: 40%;
+            height: 40%;
+            object-fit: contain;
+        }
     
         .wooden h1 {
-            margin-top: 100px; /* Adjust the space between the top of the container and the h1 text */
-            line-height: 1.5; /* Adjust the line height to lower the text */
+            margin-top: 50px;
+            line-height: 1.5;
         }
     
         .wooden ul {
-            list-style: none; /* Remove default list styles */
-            padding: 0; /* Remove default padding */
+            list-style: none;
+            padding: 0;
+        }
+
+        .pagination {
+            display: flex;
+            padding-left: 850px;
+            padding-right: 250px;
         }
     
     </style>
@@ -58,57 +75,94 @@
             
             <h1><img src="../static/puzzle_list/Puzzle_List.png" alt="puzzle list"></h1>
             <input type="text" id="searchInput" onkeyup="filterItems()" placeholder="Search for puzzles...">
-            <h2><img src="../static/puzzle_list/line.png" alt="separator"></h2>
+            <h2><div class="l-line"><img src="../static/puzzle_list/line.png" alt="separator"></div></h2>
 
-            <!-- <ul class="list1">
-                {% for i in range(11) %}
-                    {% if loop.index <= puzzles|length %}
-                        {% set puzzle = puzzles[loop.index - 1] %}
-                        <li  class="filterable">
-                            <span style="color: transparent;">-</span>
-                        </li>
-                    {% else %}
-                        <li>
-                            <span style="color: transparent;">-</span>
-                        </li>
-                    {% endif %}
-                    
-                    {% if loop.index < 9 %}
-                        <li>
-                            <img src="../static/puzzle_list/dash_line.png" alt="Image">
-                        </li>
-                    {% endif %}
-                {% endfor %}
-            </ul> -->
             <ul id="itemList">
-                {% for i in range(11) %}
-                    {% if loop.index <= puzzles|length %}
-                        {% set puzzle = puzzles[loop.index - 1] %}
-                        <li  class="filterable">
-                            <a href="/play-game/{{ puzzle.puzzle_name }}">
-                                {{ puzzle.puzzle_name }} by {{ puzzle.User.username }} - Numbers Played: {{ puzzle.times_puzzle_played }}, Score: {{ puzzle.puzzle_score }}
-                            </a>
-                            <span style="color: transparent;">-</span>
-                        </li>
-                    {% else %}
-                        <li>
-                            <span style="color: transparent;">-</span>
-                        </li>
-                    {% endif %}
-                    
-                    {% if loop.index < 9 %}
-                        <li>
-                            <img src="../static/puzzle_list/dash_line.png" alt="Image">
-                        </li>
+                {% for i in range(puzzles|length) %}
+                    {% set puzzle = puzzles[i] %}
+                    <li class="filterable puzzle-item" style="display: none;">
+                        <a href="/play-game/{{ puzzle.puzzle_name }}">
+                            {{ puzzle.puzzle_name }} by {{ puzzle.User.username }} - Numbers Played: {{ puzzle.times_puzzle_played }}, Score: {{ puzzle.puzzle_score }}
+                            <div class="dash-line"><img src="../static/puzzle_list/dash_line.png" alt="Image"></div>
+                        </a>
+                    </li>
+                    {% set remaining_items = 5 - (puzzles|length) %}
+                    {% if remaining_items > 0 %}
+                        {% for j in range(remaining_items) %}
+                            <li class="filterable puzzle-item" style="display: none;">
+                                <span style="color: transparent;">-</span>
+                            </li>
+                        {% endfor %}
                     {% endif %}
                 {% endfor %}
+                
             </ul>
+            
+            <div class="pagination">
+                <button id="prevPage" onclick="prevPage()">Previous</button>
+                <span id="pageNumbers"></span>
+                <button id="nextPage" onclick="nextPage()">Next</button>
+            </div>
+            
         </div>
     </div>
      
     {% include "footer.html" %}  
 
 </body>
+
+<script>
+    const itemsPerPage = 5; // Adjust the number of items per page
+    let currentPage = 1;
+
+    const items = document.querySelectorAll('.puzzle-item');
+    const dashLines = document.querySelectorAll('.dash-line');
+
+    function showPage(page) {
+        const start = (page - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+
+        items.forEach((item, index) => {
+            item.style.display = (index >= start && index < end) ? 'list-item' : 'none';
+        });
+
+        dashLines.forEach((dash, index) => {
+            dash.style.display = (index >= start && index < end - 1) ? 'block' : 'none';
+        });
+
+        updatePageNumbers();
+        updateButtonState();
+    }
+
+    function updatePageNumbers() {
+        const pageCount = Math.ceil(items.length / itemsPerPage);
+        const pageNumbers = document.getElementById('pageNumbers');
+        pageNumbers.innerHTML = `Page ${currentPage} of ${pageCount}`;
+    }
+
+    function updateButtonState() {
+        document.getElementById('prevPage').disabled = currentPage === 1;
+        document.getElementById('nextPage').disabled = currentPage === Math.ceil(items.length / itemsPerPage);
+    }
+
+    function nextPage() {
+        if (currentPage < Math.ceil(items.length / itemsPerPage)) {
+            currentPage++;
+            showPage(currentPage);
+        }
+    }
+
+    function prevPage() {
+        if (currentPage > 1) {
+            currentPage--;
+            showPage(currentPage);
+        }
+    }
+
+    // Initialize the first page
+    showPage(currentPage);
+</script>
+
 
 <script>
     function filterItems() {
@@ -129,50 +183,4 @@
         }
     }
 </script>
-
-<!-- <script>
-    var originalItemList = []; 
-
-    window.onload = function() {
-        var ul = document.getElementById('itemList');
-        var li = ul.getElementsByClassName('filterable');
-        for (var i = 0; i < li.length; i++) {
-            originalItemList.push(li[i].cloneNode(true)); 
-        }
-    };
-
-    function filterItems() {
-        var input, filter, ul, li, a, i, txtValue;
-        input = document.getElementById('searchInput');
-        filter = input.value.toUpperCase();
-        ul = document.getElementById('itemList');
-        li = ul.getElementsByClassName('filterable'); 
-        var filteredItems = [];
-
-        for (i = 0; i < li.length; i++) {
-            a = li[i].getElementsByTagName('a')[0];
-            txtValue = a.textContent || a.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                li[i].style.display = ''; 
-                filteredItems.push(li[i]); 
-            } else {
-                li[i].style.display = 'none'; 
-            }
-        }
-
-        
-        if (filter === '') {
-            ul.innerHTML = ''; 
-            originalItemList.forEach(function(item) {
-                ul.appendChild(item.cloneNode(true)); 
-            });
-        } else {
-            
-            ul.innerHTML = ''; 
-            filteredItems.forEach(function(item) {
-                ul.appendChild(item); 
-            });
-        }
-    }
-</script> -->
 </html>
