@@ -1,37 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8"/>
+  <head>
+    <meta charset="UTF-8" />
     <title>Create Your Wordle Game</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/create_game.css') }}">
-</head>
-<body>  
-    <nav>
-        <ul class="nav-list">
-            <li class="nav-home"><a href="/login-register" class="nav-link" data-target="home"><img src="{{ url_for('static', filename='website_name_icon.png') }}" alt="Home Page also the login page"></a></li>
-            <li class="nav-button"><a href="/puzzle-list" class="nav-link" data-target="puzzle-list"><img src="{{ url_for('static', filename='navigation/nav_puzzle.png') }}" alt="Puzzle"></a></li>
-            <li class="nav-button"><a href="/create-game" class="nav-link" data-target="create-game"><img src="{{ url_for('static', filename='navigation/nav_create.png') }}" alt="Create"></a></li>
-            <li class="nav-button"><a href="/profile" class="nav-link" data-target="profile"><img src="{{ url_for('static', filename='navigation/nav_profile.png') }}" alt="Profile"></a></li>
-            <li class="nav-button"><a href="/leaderboard" class="nav-link" data-target="leaderboard"><img src="{{ url_for('static', filename='navigation/nav_score.png') }}" alt="Score"></a></li>
-        </ul>
-    </nav>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/create_game.css') }}"
+    />
+  </head>
+  <body>
+    {% include "navbar.html" %}
     <header>
-        <h1>Create Your Wordle Game</h1>
+      <h1>Create Your Wordle Game</h1>
     </header>
     <div class="content">
-        <form action="{{ url_for('create-game.protect') }}" method="POST">
-            <label for="form_game_name">Please give a unique name for your wordle game:</label>
-            <input type="text" name="form_game_name" placeholder="Please use letters and numbers" required><br><br>
+      <form action="{{ url_for('create-game.protect') }}" method="POST">
+        <label for="form_game_name"
+          >Please give a unique name for your wordle game:</label
+        >
+        <input
+          type="text"
+          name="form_game_name"
+          placeholder="Please use letters and numbers"
+          required
+        /><br /><br />
 
-            <label for="form_wordle_solution">Please type in the correct Wordle solution:</label>
-            <input type="text" name="form_wordle_solution" placeholder="Please use a real word" required><br><br>
+        <label for="form_wordle_solution"
+          >Please type in the correct Wordle solution:</label
+        >
+        <input
+          type="text"
+          name="form_wordle_solution"
+          placeholder="Please use a real word"
+          required
+        /><br /><br />
 
-            <label for="form_number_of_attempts">How many attempts are allowed for your Wordle game:</label>
-            <input type="number" name="form_number_of_attempts" placeholder="Please use a number" required><br><br>
+        <label for="form_number_of_attempts"
+          >How many attempts are allowed for your Wordle game:</label
+        >
+        <input
+          type="number"
+          name="form_number_of_attempts"
+          placeholder="Please use a number"
+          required
+        /><br /><br />
 
-            <button type="submit">Submit and Create</button>
-        </form>
+        <button type="submit">Submit and Create</button>
+      </form>
     </div>
-</body>
+    {% include "footer.html" %}
+  </body>
 </html>
-
