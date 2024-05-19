@@ -7,7 +7,6 @@ bp_ldboard = Blueprint('leaderboard', __name__, url_prefix="/leaderboard")
 
 @bp_ldboard.route('/')
 def ranking():
-    print("test")
     if(current_user.is_anonymous):
         loginStatus = False
         userName = "-"        
