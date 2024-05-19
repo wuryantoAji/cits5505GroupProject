@@ -3,6 +3,7 @@ html {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
+  background-color: #f4eeee;
 }
 
 header {
@@ -58,6 +59,7 @@ header nav ul {
   display: absolute;
   top: 50%;
   left: 10%;
+  padding-left: 2%;
   color: white;
   font-size: 40px;
   font-weight: bold;
@@ -84,9 +86,13 @@ header nav ul {
   margin: 10px;
   height: 400px;
   display: flex;
-  justify-content: center;
   flex-grow: 1;
   box-sizing: border-box;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px; /* Optional: padding for the container */
+  overflow: auto; /* Makes overflow items scrollable */
+  white-space: nowrap; /* Prevents content from wrapping to test horizontal scrolling */
 }
 
 #solved,
@@ -97,13 +103,6 @@ header nav ul {
 
 #score {
   flex: 0.6 1 auto;
-}
-
-.panel h2 {
-  margin: 0;
-  position: relative;
-  display: flex;
-  top: 10%;
 }
 
 /**
@@ -122,7 +121,12 @@ header nav ul {
     height: 150px;
   }
 } */
-
+.logout{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #f4eeee;
+}
 footer {
   width: 100%;
   padding: 10px 20px;

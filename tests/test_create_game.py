@@ -2,7 +2,6 @@ import unittest
 from flask_testing import TestCase
 from application import create_app, db
 from application.models import User, WordlePuzzle  # Import WordlePuzzle
-from application.login_register import set_password
 from config import TestConfig
 
 class TestCreateGame(TestCase):
@@ -13,9 +12,9 @@ class TestCreateGame(TestCase):
     def setUp(self):
         db.create_all()
 
-        # Create a test user
-        password_hash = set_password('password123')
-        user = User(username='testuser', password_hash=password_hash, email='test@example.com')
+        # Create a test user)
+        user = User(username='testuser', email='test@example.com')
+        user.set_password('password123')
         db.session.add(user)
         db.session.commit()
 
@@ -30,10 +29,7 @@ class TestCreateGame(TestCase):
             follow_redirects=True
         )
 
-    def test_create_game(self):
-
-        # self.login('testuser', 'password123')
-
+    def test_get_create_game_page(self):
         # Log in as the test user
         self.client.post(
             '/login-register',
@@ -41,28 +37,61 @@ class TestCreateGame(TestCase):
             follow_redirects=True
         )
 
-        with self.client as c:
-            with c.session_transaction() as session:
-                user_id = session.get('user_id')  # Get the user ID from the session
+        # Access the create game page
+        response = self.client.get('/create-game', follow_redirects=True)
+        self.assertEqual(response.status_code, 200)
 
-        response = self.client.post(
-            '/create-game/create_game',
-            data={
-                'game_name': 'Test Game',
-                'wordle_solution': 'TEST',
-                'number_of_attempt': 3
-            },
+    def test_post_create_game(self):
+        # Log in as the test user
+        self.client.post(
+            '/login-register',
+            data={'username': 'testuser', 'password': 'password123', 'hiddenTag': 'login'},
             follow_redirects=True
         )
 
+        response = self.client.post(
+            '/create-game',
+            data={
+                'form_game_name': 'Test Game',
+                'form_wordle_solution': 'TEST',
+                'form_number_of_attempts': 3
+            },
+            follow_redirects=True
+        )
         # Check if game creation was successful
-        self.assertEqual(response.status_code, 200)
 
         # Check if the game is stored in the database
-        game = WordlePuzzle.query.filter_by(puzzle_name='Test Game').first()
+        game = WordlePuzzle.query.filter_by(puzzle_name='test-game').first()
         self.assertIsNotNone(game)
         self.assertEqual(game.puzzle_solution, 'TEST')
         self.assertEqual(game.number_of_attempt, 3)
 
-if __name__ == '__main__':
-    unittest.main()
+    def test_post_create_duplicate_game(self):
+        # Log in as the test user
+        self.client.post(
+            '/login-register',
+            data={'username': 'testuser', 'password': 'password123', 'hiddenTag': 'login'},
+            follow_redirects=True
+        )
+
+        response1 = self.client.post(
+            '/create-game',
+            data={
+                'form_game_name': 'Test Game',
+                'form_wordle_solution': 'TEST',
+                'form_number_of_attempts': 3
+            },
+            follow_redirects=True
+        )
+
+        response2 = self.client.post(
+            '/create-game',
+            data={
+                'form_game_name': 'Test Game',
+                'form_wordle_solution': 'TEST',
+                'form_number_of_attempts': 3
+            },
+            follow_redirects=True
+        )
+        
+        self.assertEqual(response2.status_code, 200) 

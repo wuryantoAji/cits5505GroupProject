@@ -2,7 +2,6 @@ import unittest
 from flask_testing import TestCase
 from application import create_app, db
 from application.models import User
-from application.login_register import set_password
 from config import TestConfig
 
 class TestAuth(TestCase):
@@ -14,9 +13,9 @@ class TestAuth(TestCase):
     def setUp(self):
         db.create_all()
 
-        # Create a test user
-        password_hash = set_password('password123')
-        user = User(username='testuser', password_hash=password_hash, email='test@example.com')
+        # Create a test user)
+        user = User(username='testuser', email='test@example.com')
+        user.set_password('password123')
         db.session.add(user)
         db.session.commit()
 
@@ -81,6 +80,3 @@ class TestAuth(TestCase):
         # with self.client as c:
         #     with c.session_transaction() as session:
         #         self.assertIsNone(session.get('user_id'))
-
-if __name__ == '__main__':
-    unittest.main()
