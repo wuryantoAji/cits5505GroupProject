@@ -66,5 +66,13 @@ Group project for CITS5505 - Agile Web Development
 - give hint to the user
 - automatically give difficulty tag to the puzzle based on number of letter and number of guess
 
+References for asset
+1. login_bar & signup_bar : https://m.twitch.tv/nojamjess/about
+2. grey cat : https://www.pngsucai.com/png/2106631.html
+3. daisy flower in 404 page: from Takaki Murakami （https://www.instagram.com/p/CY8f2S7L0iG/?igsh=MWFkYWxlNXo2Z2w4OA==）
+4. play board & title frame : https://streamdps.com/panels/115695/
+5. trophy: https://www.redbubble.com/i/sticker/Pixel-Gold-Trophy-Vector-Design-by-ercdesign/96400926.EJUG5
+6. clouds : https://www.shutterstock.com/zh/image-vector/fluffy-clouds-pixel-art-icon-set-2135707491
+
 ## Tutorial or Reference Used
 1. https://flask.palletsprojects.com/en/3.0.x/tutorial/layout/
