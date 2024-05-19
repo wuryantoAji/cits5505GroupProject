@@ -11,41 +11,41 @@
     <style>
 
         #searchInput {
-            top: 360px; /* Adjust the top position as per your requirement */
-            left: 1000px; /* Adjust the left position as per your requirement */
+            top: 360px;
+            left: 1000px;
     
             background-image: url('../static/searchbar/searchbar_total1.PNG');
-            background-size: cover; /* Adjust the size as needed */
+            background-size: cover;
             background-repeat: no-repeat;
-            background-position: center; /* Adjust position of the image */
+            background-position: center;
             padding-left: 25px;
-            padding-right: 35px; /* Leave space for the search icon */
-            border: 1px solid #ccc; /* Add border for better appearance */
-            border-radius: 5px; /* Add rounded corners */
-            height: 45px; /* Adjust height as needed */
-            width: 300px; /* Adjust width as needed */
+            padding-right: 35px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            height: 45px;
+            width: 300px;
         }
     
     
         .wooden {
-            background-image: url('../static/leaderboard/wooden_frame.png'); /* Replace 'background_image.jpg' with your image file */
-            background-size: 85%; /* This makes sure the background image covers the entire area of the h1 tag */
+            background-image: url('../static/leaderboard/wooden_frame.png');
+            background-size: 85%;
             background-repeat: no-repeat;
-            background-position: center; /* Center the background image */
-            padding: 20px; /* Adding some padding to give space around the content */
-            text-align: center; /* Centering the content */
+            background-position: center;
+            padding: 20px;
+            text-align: center;
             width: 90%;
             height: auto;
         }
     
         .wooden h1 {
-            margin-top: 100px; /* Adjust the space between the top of the container and the h1 text */
-            line-height: 1.5; /* Adjust the line height to lower the text */
+            margin-top: 100px;
+            line-height: 1.5;
         }
     
         .wooden ul {
-            list-style: none; /* Remove default list styles */
-            padding: 0; /* Remove default padding */
+            list-style: none;
+            padding: 0;
         }
     
     </style>
@@ -59,27 +59,6 @@
             <h1><img src="../static/puzzle_list/Puzzle_List.png" alt="puzzle list"></h1>
             <input type="text" id="searchInput" onkeyup="filterItems()" placeholder="Search for puzzles...">
             <h2><img src="../static/puzzle_list/line.png" alt="separator"></h2>
-
-            <!-- <ul class="list1">
-                {% for i in range(11) %}
-                    {% if loop.index <= puzzles|length %}
-                        {% set puzzle = puzzles[loop.index - 1] %}
-                        <li  class="filterable">
-                            <span style="color: transparent;">-</span>
-                        </li>
-                    {% else %}
-                        <li>
-                            <span style="color: transparent;">-</span>
-                        </li>
-                    {% endif %}
-                    
-                    {% if loop.index < 9 %}
-                        <li>
-                            <img src="../static/puzzle_list/dash_line.png" alt="Image">
-                        </li>
-                    {% endif %}
-                {% endfor %}
-            </ul> -->
             <ul id="itemList">
                 {% for i in range(11) %}
                     {% if loop.index <= puzzles|length %}
@@ -129,50 +108,4 @@
         }
     }
 </script>
-
-<!-- <script>
-    var originalItemList = []; 
-
-    window.onload = function() {
-        var ul = document.getElementById('itemList');
-        var li = ul.getElementsByClassName('filterable');
-        for (var i = 0; i < li.length; i++) {
-            originalItemList.push(li[i].cloneNode(true)); 
-        }
-    };
-
-    function filterItems() {
-        var input, filter, ul, li, a, i, txtValue;
-        input = document.getElementById('searchInput');
-        filter = input.value.toUpperCase();
-        ul = document.getElementById('itemList');
-        li = ul.getElementsByClassName('filterable'); 
-        var filteredItems = [];
-
-        for (i = 0; i < li.length; i++) {
-            a = li[i].getElementsByTagName('a')[0];
-            txtValue = a.textContent || a.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                li[i].style.display = ''; 
-                filteredItems.push(li[i]); 
-            } else {
-                li[i].style.display = 'none'; 
-            }
-        }
-
-        
-        if (filter === '') {
-            ul.innerHTML = ''; 
-            originalItemList.forEach(function(item) {
-                ul.appendChild(item.cloneNode(true)); 
-            });
-        } else {
-            
-            ul.innerHTML = ''; 
-            filteredItems.forEach(function(item) {
-                ul.appendChild(item); 
-            });
-        }
-    }
-</script> -->
 </html>
