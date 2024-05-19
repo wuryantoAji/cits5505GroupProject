@@ -5,7 +5,7 @@ from flask import (
 )
 from flask_login import current_user
 from datetime import date
-from application.models import User, WordlePuzzle, Comments, ScoreTable
+from application.models import User, WordlePuzzle, ScoreTable
 from application import db
 
 bp = Blueprint('play-game', __name__, url_prefix='/play-game')
@@ -21,7 +21,6 @@ def playGame(puzzleName):
     gameBoard = WordlePuzzle.query.filter_by(puzzle_name=puzzleName).first()
     if(gameBoard is None):
         return redirect('/404')
-    comments = Comments.query.filter_by(puzzle_id=gameBoard.puzzle_id).order_by(Comments.posted_date).all()
     puzzleName = gameBoard.puzzle_name.replace("-"," ")
     puzzlePayload = json.dumps({
         'puzzle_name' : puzzleName,
@@ -68,6 +67,7 @@ def submitAnswer():
             saveToDB = False
     # check if login
     if(loginStatus):
+        user = User.query.filter_by(user_id=current_user.user_id).first()
         if(isSolved):
             scoreData = ScoreTable.query.filter_by(user_id=current_user.user_id, puzzle_id=puzzleId).first()
             if(scoreData is None):
@@ -76,6 +76,7 @@ def submitAnswer():
             else:
                 scoreData.score_achieved = gameBoard.puzzle_score
                 scoreData.number_of_attempts += 1
+            user.overall_score = user.overall_score + gameBoard.puzzle_score
             flash("You guess it right!!", 'info')
             gameBoard.times_puzzle_played += 1
         else:
@@ -89,6 +90,7 @@ def submitAnswer():
                     scoreData.number_of_attempts += 1
                     if(achievedScore > scoreData.score_achieved):
                         scoreData.score_achieved = achievedScore
+                user.overall_score = user.overall_score + achievedScore
                 flash("You ran out of guess attempt.", 'info')
                 gameBoard.times_puzzle_played += 1
         db.session.commit()

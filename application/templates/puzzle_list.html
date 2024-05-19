@@ -59,27 +59,6 @@
             <h1><img src="../static/puzzle_list/Puzzle_List.png" alt="puzzle list"></h1>
             <input type="text" id="searchInput" onkeyup="filterItems()" placeholder="Search for puzzles...">
             <h2><img src="../static/puzzle_list/line.png" alt="separator"></h2>
-
-            <!-- <ul class="list1">
-                {% for i in range(11) %}
-                    {% if loop.index <= puzzles|length %}
-                        {% set puzzle = puzzles[loop.index - 1] %}
-                        <li  class="filterable">
-                            <span style="color: transparent;">-</span>
-                        </li>
-                    {% else %}
-                        <li>
-                            <span style="color: transparent;">-</span>
-                        </li>
-                    {% endif %}
-                    
-                    {% if loop.index < 9 %}
-                        <li>
-                            <img src="../static/puzzle_list/dash_line.png" alt="Image">
-                        </li>
-                    {% endif %}
-                {% endfor %}
-            </ul> -->
             <ul id="itemList">
                 {% for i in range(11) %}
                     {% if loop.index <= puzzles|length %}
@@ -129,50 +108,4 @@
         }
     }
 </script>
-
-<!-- <script>
-    var originalItemList = []; 
-
-    window.onload = function() {
-        var ul = document.getElementById('itemList');
-        var li = ul.getElementsByClassName('filterable');
-        for (var i = 0; i < li.length; i++) {
-            originalItemList.push(li[i].cloneNode(true)); 
-        }
-    };
-
-    function filterItems() {
-        var input, filter, ul, li, a, i, txtValue;
-        input = document.getElementById('searchInput');
-        filter = input.value.toUpperCase();
-        ul = document.getElementById('itemList');
-        li = ul.getElementsByClassName('filterable'); 
-        var filteredItems = [];
-
-        for (i = 0; i < li.length; i++) {
-            a = li[i].getElementsByTagName('a')[0];
-            txtValue = a.textContent || a.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                li[i].style.display = ''; 
-                filteredItems.push(li[i]); 
-            } else {
-                li[i].style.display = 'none'; 
-            }
-        }
-
-        
-        if (filter === '') {
-            ul.innerHTML = ''; 
-            originalItemList.forEach(function(item) {
-                ul.appendChild(item.cloneNode(true)); 
-            });
-        } else {
-            
-            ul.innerHTML = ''; 
-            filteredItems.forEach(function(item) {
-                ul.appendChild(item); 
-            });
-        }
-    }
-</script> -->
 </html>
