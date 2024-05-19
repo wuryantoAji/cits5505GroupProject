@@ -32,7 +32,10 @@ Group project for CITS5505 - Agile Web Development
     1. Go to your browser and type http://localhost:5000/login-register/
 
 ## How to Run the Tests for the Application
-
+1. assuming that coverage has been installed in the virtual environment
+2. coverage run -m unittest tests/test_suite.py
+3. coverage report to show the code coverage report
+4. coverage html for more detail
 
 ## Page list
 ### Phase 1
@@ -40,6 +43,10 @@ Group project for CITS5505 - Agile Web Development
 - All Puzzle Page ->  a page that shows all of the available puzzle in the database
 - Create Wordle Puzzle Page -> a page where user can submit their own wordle puzzle for other people to solve
 - Play Wordle Puzzle Page -> a page where user can play a wordle puzzle from the database
+
+### Phase 2
+- Profile Page -> a page that shows a list of puzzle that a certain user has created, a list of puzzle that user has solved and the user total score
+- Leadboard Page -> a page that shows a list of top 5 score earner
 
 ## Feature List
 ### Phase 1
@@ -49,8 +56,15 @@ Group project for CITS5505 - Agile Web Development
 - create wordle puzzle
 - play wordle puzzle
 
+### Phase 2
+- see user profile
+- see leaderboard score
+
 ## Possible additional feature?
-- .....
+- valid word checker when creating puzzle
+- valid word checker when submitting guess
+- give hint to the user
+- automatically give difficulty tag to the puzzle based on number of letter and number of guess
 
 ## Tutorial or Reference Used
 1. https://flask.palletsprojects.com/en/3.0.x/tutorial/layout/
