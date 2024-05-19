@@ -8,6 +8,7 @@ from datetime import date
 from application.models import User, WordlePuzzle
 from application import db
 from urllib.parse import quote
+import re
 
 class CreateGameForm(FlaskForm):
     game_name = StringField('GameName', validators=[InputRequired()])
@@ -35,10 +36,24 @@ def post_request():
     if existing_game:
         flash("Game name already exists. Please choose a different name.")
         return render_template('./create_game.html')
-
+    
     wordle_solution = request.form['form_wordle_solution']
     number_of_attempts = int(request.form['form_number_of_attempts'])
     game_url = f"../play-game/{safe_game_name}"
+    
+    game_solution_check = re.compile(r'^[a-zA-Z]+$')
+
+    if len(game_name) > 15:
+        flash("Game name too long.")
+        return render_template('./create_game.html')
+    
+    if not game_solution_check.match(wordle_solution) or len(wordle_solution) > 15:
+        flash("Wordle solution can only use letters and no longer than 15 letters.")
+        return render_template('./create_game.html')
+    
+    if not number_of_attempts > 0:
+        flash("Number of attempts no less than 1.")
+        return render_template('./create_game.html')
 
     new_game = WordlePuzzle(
         user_id=current_user.user_id,

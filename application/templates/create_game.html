@@ -24,33 +24,47 @@
       <h1>Create Your Wordle Game</h1>
     </header>
     <div class="content">
-        <form action="{{ url_for('create-game.protect') }}" method="POST">
-            <input 
-                type="text" 
-                name="form_game_name" 
-                placeholder="Please use letters and numbers" 
-                required>
-            <label for="form_game_name">
-                Please give a unique name for your wordle game:
-            </label><br><br>
+        <form action="{{ url_for('create-game.protect') }}" method="POST" onsubmit="return checkInput()">
+            <div class="mb-3">
+                <label for="form_game_name">
+                    Please give a unique name for your wordle game:
+                <input 
+                    type="text" 
+                    name="form_game_name" 
+                    placeholder="Please use no more than 15 characters" 
+                    required>
+                </label>
+                <div id="gameNameError" style="display: none";> 
+                </div>
+            </div>
+           <br><br>
+
+           <div class="mb-3">
+                <label for="form_wordle_solution">
+                    Please type in the correct Wordle solution:
+                <input 
+                    type="text" 
+                    name="form_wordle_solution" 
+                    placeholder="Please use only letters" 
+                    required>
+                </label><br><br>
+                <div id="solutionError" style="display: none";> 
+                </div>
+           </div>
+           
+           <div class="mb-3">
+                <label for="form_number_of_attempts">
+                    How many attempts are allowed for your Wordle game:
+                <input 
+                    type="number" 
+                    name="form_number_of_attempts" 
+                    placeholder="Please use a number larger than 0" 
+                    required>
+                </label><br><br>
+                <div id="attemptsError"style="display: none";>
+                </div>
+           </div>
             
-            <input 
-                type="text" 
-                name="form_wordle_solution" 
-                placeholder="Please use a real word" 
-                required>
-            <label for="form_wordle_solution">
-                Please type in the correct Wordle solution:
-            </label><br><br>
-            
-            <input 
-                type="number" 
-                name="form_number_of_attempts" 
-                placeholder="Please use a number" 
-                required>
-            <label for="form_number_of_attempts">
-                How many attempts are allowed for your Wordle game:
-            </label><br><br>
             <button 
                 type="submit">
                 Submit and Create
@@ -58,5 +72,34 @@
         </form>
     </div>
     {% include "footer.html" %}
+    <script>
+        function checkInput() {
+            const puzzleSolution = document.forms["gameForm"]["form_wordle_solution"].value;
+            const solutionPattern = /^[a-zA-Z]+$/;
+            const number_of_attempts = document.forms["gameForm"]["form_number_of_attempts"].value
+
+            document.getElementById("nameError").innerText = "";
+            document.getElementById("solutionError").innerText = "";
+            document.getElementById("attemptsError").innerText = "";
+
+            if (!solutionPattern.test(puzzleSolution)) {
+                document.getElementById("solutionError").style.display = "Puzzle solution uses only letters";
+                return false;
+            }
+            if (puzzleSolution.length > 15) {
+                document.getElementById("solutionError").style.display = "Puzzle solution no longer than 15 letters.";
+                return false;
+            }
+            if (puzzleName.length > 15) {
+                document.getElementById("nameError").style.display = "Puzzle name no longer than 15 letters";
+                return false;
+            }
+            if (isNaN(numberOfAttempts) || numberOfAttempts <= 0) {
+                document.getElementById("attemptsError").style.display = "Number of attempts must be greater than 0.";
+                return false;
+            }
+            return true;
+        }
+    </script>
 </body>
 </html>

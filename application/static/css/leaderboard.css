@@ -41,16 +41,17 @@ body {
       padding: 10px;
       text-align: center;
   
-    #searchInput {
-      font-size: 1em;
-      width: 100%;
-      padding: 8px;
-    }
-  
-    #searchInput::placeholder {
-      font-size: 1em;
-      color: #bcbaba;
-    }
+  }
+
+  #searchInput {
+    font-size: 1em;
+    width: 100%;
+    padding: 8px;
+  }
+
+  #searchInput::placeholder {
+    font-size: 1em;
+    color: #bcbaba;
   }
 
   .wooden {

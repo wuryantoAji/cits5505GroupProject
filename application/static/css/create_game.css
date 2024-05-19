@@ -49,7 +49,7 @@ body {
   }
 
   .content form {
-    width: 60%;
+    width: 80%;
     margin: 0 auto;
     background-color: rgba(242, 184, 147, 0.85);
     padding: 20px;
@@ -60,9 +60,9 @@ body {
   .content form input[type="text"],
   .content form input[type="number"] {
     font-family: "Comic Sans MS", sans-serif;
-    font-size: 2em;
+    font-size: 1.2em;
     width: 100%;
-    padding: 60px 100px;
+    padding: 30px 50px;
     margin: 0;
     box-sizing: border-box;
     background-image: url("../gamepage/commentboard.png");
@@ -74,16 +74,16 @@ body {
   .content form input[type="text"]::placeholder,
   .content form input[type="number"]::placeholder {
     font-family: "Comic Sans MS", sans-serif;
-    font-size: 1em;
+    font-size: 1.2em;
   }
   .content label {
     font-family: "Comic Sans MS", sans-serif;
-    font-size: 2em;
+    font-size: 1.2em;
   }
   
   .content button {
     font-family: "Comic Sans MS", sans-serif;
-    font-size: 2em;
+    font-size: 1.5em;
     background-color: #0095ff;
     color: white;
     border: none;

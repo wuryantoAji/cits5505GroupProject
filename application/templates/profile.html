@@ -16,27 +16,30 @@
     {% include "navbar.html" %}
     <div class="username-section">
       <span id="username">{{ profileUsername }}</span>
-  </div>
     </div>
     <div class="content">
       <div class="panel" id="solved">
         <h2>Solved Puzzle</h2>
         {% for i in solvedPuzzle %}
-          <li>
-            <a href="/play-game/{{ i.name }}">
-                {{ i.name }}
-            </a>
-          </li>
+          <ul>
+            <li>
+              <a href="/play-game/{{ i.name }}">
+                  {{ i.name }}
+              </a>
+            </li>
+          </ul>
         {% endfor %}
       </div>
       <div class="panel" id="create-puzzle">
         <h2>Create Puzzle</h2>
         {% for i in createdPuzzle %}
-        <li>
-          <a href="/play-game/{{ i.name }}">
-              {{ i.name }}
-          </a>
-        </li>
+        <ul>
+          <li>
+            <a href="/play-game/{{ i.name }}">
+                {{ i.name }}
+            </a>
+          </li>
+        </ul>
         {% endfor %}
       </div>
       <div class="panel" id="score">
