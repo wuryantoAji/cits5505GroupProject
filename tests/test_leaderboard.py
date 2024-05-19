@@ -1,10 +1,11 @@
 import unittest
 from flask_testing import TestCase
 from application import create_app, db
-from application.models import User, WordlePuzzle  # Import WordlePuzzle
+from application.models import User
 from config import TestConfig
 
-class TestPuzzleList(TestCase):
+class TestLeaderboard(TestCase):
+
     def create_app(self):
         app = create_app(TestConfig)
         return app
@@ -22,10 +23,23 @@ class TestPuzzleList(TestCase):
         db.session.remove()
         db.drop_all()
 
-    def test_puzzle_list_render(self):
+    def test_leaderboard_login(self):
+        # Access the login-register page
+        self.client.post(
+            '/login-register',
+            data={'username': 'testuser', 'password': 'password123', 'hiddenTag': 'login'},
+            follow_redirects=True
+        )
+
         # Access the puzzle list page
-        response = self.client.get('/puzzle-list/')
+        response = self.client.get('/leaderboard/')
         
         # Check if the page renders successfully
         self.assertEqual(response.status_code, 200)
 
+    def test_leaderboard_not_login(self):
+        # Access the puzzle list page
+        response = self.client.get('/leaderboard/')
+        
+        # Check if the page renders successfully
+        self.assertEqual(response.status_code, 200)

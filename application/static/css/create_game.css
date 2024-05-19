@@ -5,84 +5,84 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-image: url("../loginpage/BACKGROUND-PIC.png");
+    background-image: url(../background_score_list.png);
     background-size: cover;
-    background-position: relative;
-}
+  }
 
-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.8);
-}
+  nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+  }
+  
+  ul.nav-list {
+      list-style-type: none;
+      display: flex;
+      margin: 0;
+      padding: 10px;
+      justify-content: space-around;
+      align-items: center;
+  }
+  
+  .nav-home {
+      margin-right: auto;
+      background-color: rgba(255, 255, 255, 0.5);
+      border-radius: 2px;
+  }
+  
+  .nav-button {
+      margin-left: 5px;
+      padding: 5px;
+      background-color: rgba(255, 255, 255, 0.5);
+      border-radius: 5px;
+  }
+  
+  header {
+      margin-top: 50px;
+      font-family: 'Comic Sans MS', sans-serif;
+      font-size: 2em;
+      color: #3b72ff;
+      background-color: #d5f0fd;
+      padding: 10px;
+      text-align: center;
+  }
 
-ul.nav-list {
-    list-style-type: none;
-    display: flex;
-    margin: 0;
-    padding: 10px;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.nav-home {
-    margin-right: auto;
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 2px;
-}
-
-.nav-button {
-    margin-left: 5px;
-    padding: 5px;
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 5px;
-}
-
-header {
-    margin-top: 50px;
-    font-family: 'Comic Sans MS', sans-serif;
-    font-size: 2em;
-    color: #3b72ff;
-    background-color: #d5f0fd;
-    padding: 10px;
-    text-align: center;
-}
-
-.content form {
+  .content form {
     width: 60%;
     margin: 0 auto;
     background-color: rgba(242, 184, 147, 0.85);
     padding: 20px;
     border-radius: 8px;
     text-align: center;
-}
-
-.content form input[type="text"],.content form input[type="number"] {
-    font-family: 'Comic Sans MS', sans-serif;
+  }
+  
+  .content form input[type="text"],
+  .content form input[type="number"] {
+    font-family: "Comic Sans MS", sans-serif;
     font-size: 2em;
     width: 100%;
     padding: 60px 100px;
     margin: 0;
     box-sizing: border-box;
-    background-image: url('../gamepage/commentboard.png');
+    background-image: url("../gamepage/commentboard.png");
     background-size: cover;
     background-position: center;
     background-size: 100% 100%;
-}
-
-.content form input[type="text"]::placeholder,.content form input[type="number"]::placeholder {
-    font-family: 'Comic Sans MS', sans-serif;
+  }
+  
+  .content form input[type="text"]::placeholder,
+  .content form input[type="number"]::placeholder {
+    font-family: "Comic Sans MS", sans-serif;
     font-size: 1em;
-}
-.content label{
-    font-family: 'Comic Sans MS', sans-serif;
+  }
+  .content label {
+    font-family: "Comic Sans MS", sans-serif;
     font-size: 2em;
-}
-
-.content button {
-    font-family: 'Comic Sans MS', sans-serif;
+  }
+  
+  .content button {
+    font-family: "Comic Sans MS", sans-serif;
     font-size: 2em;
     background-color: #0095ff;
     color: white;
@@ -90,8 +90,8 @@ header {
     border-radius: 4px;
     cursor: pointer;
     padding: 14px 20px;
-}
-
-.content button:hover {
+  }
+  
+  .content button:hover {
     background-color: #81d7ff;
-}
+  }

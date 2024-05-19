@@ -23,25 +23,14 @@ def protect():
         return get_request()
     elif request.method == 'POST':
         return post_request()
-    return render_template('./create_game.html')
+    return render_template('./create_game.html', isLogin = True, username=current_user.username)
 
 def get_request():
-    target = request.args.get('target')
-    if target == 'home':
-        return redirect(url_for('home'))
-    elif target == 'puzzle-list':
-        return redirect(url_for('puzzle_list'))
-    elif target == 'leaderboard':
-        return redirect(url_for('leaderboard'))
-    elif target == 'create-game':
-        return redirect(url_for('create_game'))
-    elif target == 'profile':
-        return redirect(url_for('profile'))
-    return render_template('./create_game.html')
+    return render_template('./create_game.html', isLogin = True, username=current_user.username)
 
 def post_request():
     game_name = request.form['form_game_name']
-    safe_game_name = quote(game_name.replace(" ", "_").lower())
+    safe_game_name = quote(game_name.replace(" ", "-").lower())
     existing_game = WordlePuzzle.query.filter_by(puzzle_name=safe_game_name).first()
     if existing_game:
         flash("Game name already exists. Please choose a different name.")

@@ -1,5 +1,5 @@
 import os
-from flask import Blueprint, Flask, request, current_app,render_template, session, url_for
+from flask import Blueprint, Flask, request, current_app,render_template, session, url_for, redirect
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -37,11 +37,18 @@ def create_app(config_class=Config):
     from . import create_game
     app.register_blueprint(create_game.bp_create)
     from . import leaderboard
-    app.register_blueprint(leaderboard.bp_ldboard)
+    app.register_blueprint(leaderboard.bp_ldboard)    
+    from . import profile
+    app.register_blueprint(profile.bp)
+
     # 404 Error Handler
     @app.errorhandler(404)
     def page_not_found(e):
         # note that we set the 404 status explicitly
         return render_template('404.html'), 404
     
+    @app.route("/")
+    def default_route():
+        return redirect('/login-register')
+
     return app
